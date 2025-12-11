@@ -3,10 +3,10 @@ import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "../builtIn";
 
 export const globSearchTool: Tool = {
   type: "function",
-  displayTitle: "Glob File Search",
-  wouldLikeTo: 'search for files like "{{{ pattern }}}"',
-  isCurrently: 'searching for files like "{{{ pattern }}}"',
-  hasAlready: 'searched for files like "{{{ pattern }}}"',
+  displayTitle: "Glob 文件搜索",
+  wouldLikeTo: '搜索类似 "{{{ pattern }}}" 的文件',
+  isCurrently: '正在搜索类似 "{{{ pattern }}}" 的文件',
+  hasAlready: '已搜索过类似 "{{{ pattern }}}" 的文件',
   readonly: true,
   isInstant: true,
   group: BUILT_IN_GROUP_NAME,

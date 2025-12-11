@@ -1,10 +1,10 @@
-import os from "os";
-import { Tool } from "../..";
-import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "../builtIn";
 import {
   evaluateTerminalCommandSecurity,
   ToolPolicy,
 } from "@continuedev/terminal-security";
+import os from "os";
+import { Tool } from "../..";
+import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "../builtIn";
 
 /**
  * Get the preferred shell for the current platform
@@ -34,10 +34,10 @@ const RUN_COMMAND_NOTES = `The shell is not stateful and will not remember any p
 
 export const runTerminalCommandTool: Tool = {
   type: "function",
-  displayTitle: "Run Terminal Command",
-  wouldLikeTo: "run the following terminal command:",
-  isCurrently: "running the following terminal command:",
-  hasAlready: "ran the following terminal command:",
+  displayTitle: "运行终端命令",
+  wouldLikeTo: "运行以下终端命令：",
+  isCurrently: "正在运行以下终端命令：",
+  hasAlready: "已运行以下终端命令：",
   readonly: false,
   group: BUILT_IN_GROUP_NAME,
   function: {

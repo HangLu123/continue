@@ -6,10 +6,10 @@ import { evaluateFileAccessPolicy } from "../policies/fileAccess";
 
 export const createNewFileTool: Tool = {
   type: "function",
-  displayTitle: "Create New File",
-  wouldLikeTo: "create {{{ filepath }}}",
-  isCurrently: "creating {{{ filepath }}}",
-  hasAlready: "created {{{ filepath }}}",
+  displayTitle: "创建新文件",
+  wouldLikeTo: "创建 {{{ filepath }}}",
+  isCurrently: "正在创建 {{{ filepath }}}",
+  hasAlready: "已创建 {{{ filepath }}}",
   group: BUILT_IN_GROUP_NAME,
   readonly: false,
   isInstant: true,

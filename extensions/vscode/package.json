@@ -1,6 +1,6 @@
 {
   "name": "continue",
-  "icon": "media/icon.png",
+  "icon": "media/jody.png",
   "author": "Continue Dev, Inc",
   "version": "1.3.28",
   "repository": {
@@ -18,9 +18,9 @@
   "homepage": "https://continue.dev",
   "qna": "https://github.com/continuedev/continue/issues/new/choose",
   "license": "Apache-2.0",
-  "displayName": "Continue - open-source AI code agent",
+  "displayName": "Jody - AI code agent",
   "pricing": "Free",
-  "description": "The leading open-source AI code agent",
+  "description": "AI code agent",
   "publisher": "Continue",
   "engines": {
     "vscode": "^1.70.0",
@@ -215,7 +215,7 @@
       {
         "command": "continue.openConfigPage",
         "category": "Continue",
-        "title": "Open Settings",
+        "title": "设置",
         "icon": "$(gear)",
         "group": "Continue"
       },
@@ -239,7 +239,7 @@
       {
         "command": "continue.newSession",
         "category": "Continue",
-        "title": "New Session",
+        "title": "新建对话",
         "icon": "$(add)",
         "group": "Continue"
       },
@@ -252,7 +252,7 @@
       {
         "command": "continue.viewHistory",
         "category": "Continue",
-        "title": "View History",
+        "title": "查看历史记录",
         "icon": "$(history)",
         "group": "Continue"
       },
@@ -607,7 +607,7 @@
         {
           "id": "continue",
           "title": "Continue",
-          "icon": "media/sidebar-icon.png"
+          "icon": "media/jody.svg"
         }
       ],
       "panel": [

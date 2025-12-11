@@ -20,14 +20,14 @@ export function getStatusIntro(
 
   switch (status) {
     case "generating":
-      return "will";
+      return "将要";
     case "generated":
-      return "wants to";
+      return "想要";
     case "calling":
-      return "is";
+      return "正在";
     case "canceled":
     case "errored":
-      return "tried to";
+      return "尝试过";
     default:
       return "";
   }

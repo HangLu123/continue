@@ -38,8 +38,8 @@ export function getPlaceholderText(
   }
 
   return historyLength === 0
-    ? "Ask anything, '@' to add context"
-    : "Ask a follow-up";
+    ? "随便问我什么，输入 '@' 可添加上下文"
+    : "继续追问";
 }
 
 /**

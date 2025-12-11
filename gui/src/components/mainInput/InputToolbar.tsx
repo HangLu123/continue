@@ -73,172 +73,171 @@ function InputToolbar(props: InputToolbarProps) {
   const smallFont = useFontSize(-2);
   const tinyFont = useFontSize(-3);
 
-  return (
-    <>
-      <div
-        onClick={props.onClick}
-        className={`find-widget-skip bg-vsc-input-background flex select-none flex-row items-center justify-between gap-1 pt-1 ${props.hidden ? "pointer-events-none h-0 cursor-default opacity-0" : "pointer-events-auto mt-2 cursor-text opacity-100"}`}
-        style={{
-          fontSize: smallFont,
-        }}
-      >
-        <div className="xs:gap-1.5 flex flex-row items-center gap-1">
-          {!isInEdit && (
-            <ToolTip place="top" content="Select Mode">
-              <HoverItem className="!p-0">
-                <ModeSelect />
+return (
+  <>
+    <div
+      onClick={props.onClick}
+      className={`find-widget-skip bg-vsc-input-background flex select-none flex-row items-center justify-between gap-1 pt-1 ${props.hidden ? "pointer-events-none h-0 cursor-default opacity-0" : "pointer-events-auto mt-2 cursor-text opacity-100"}`}
+      style={{
+        fontSize: smallFont,
+      }}
+    >
+      <div className="xs:gap-1.5 flex flex-row items-center gap-1">
+        {!isInEdit && (
+          <ToolTip place="top" content="选择模式">
+            <HoverItem className="!p-0">
+              <ModeSelect />
+            </HoverItem>
+          </ToolTip>
+        )}
+        <ToolTip place="top" content="选择模型">
+          <HoverItem className="!p-0">
+            <ModelSelect />
+          </HoverItem>
+        </ToolTip>
+        <div className="xs:flex text-description -mb-1 hidden items-center transition-colors duration-200">
+          {props.toolbarOptions?.hideImageUpload ||
+            (supportsImages && (
+              <>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  style={{ display: "none" }}
+                  accept=".jpg,.jpeg,.png,.gif,.svg,.webp"
+                  onChange={(e) => {
+                    const files = e.target?.files ?? [];
+                    for (const file of files) {
+                      props.onImageFileSelected?.(file);
+                    }
+                    if (fileInputRef.current) {
+                      fileInputRef.current.value = "";
+                    }
+                  }}
+                />
+
+                <ToolTip place="top" content="附加图片">
+                  <HoverItem className="">
+                    <PhotoIcon
+                      className="h-3 w-3 hover:brightness-125"
+                      onClick={(e) => {
+                        fileInputRef.current?.click();
+                      }}
+                    />
+                  </HoverItem>
+                </ToolTip>
+              </>
+            ))}
+          {props.toolbarOptions?.hideAddContext || (
+            <ToolTip place="top" content="附加上下文">
+              <HoverItem onClick={props.onAddContextItem}>
+                <AtSymbolIcon className="h-3 w-3 hover:brightness-125" />
               </HoverItem>
             </ToolTip>
           )}
-          <ToolTip place="top" content="Select Model">
-            <HoverItem className="!p-0">
-              <ModelSelect />
-            </HoverItem>
-          </ToolTip>
-          <div className="xs:flex text-description -mb-1 hidden items-center transition-colors duration-200">
-            {props.toolbarOptions?.hideImageUpload ||
-              (supportsImages && (
-                <>
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    style={{ display: "none" }}
-                    accept=".jpg,.jpeg,.png,.gif,.svg,.webp"
-                    onChange={(e) => {
-                      const files = e.target?.files ?? [];
-                      for (const file of files) {
-                        props.onImageFileSelected?.(file);
-                      }
-                      if (fileInputRef.current) {
-                        fileInputRef.current.value = "";
-                      }
-                    }}
-                  />
-
-                  <ToolTip place="top" content="Attach Image">
-                    <HoverItem className="">
-                      <PhotoIcon
-                        className="h-3 w-3 hover:brightness-125"
-                        onClick={(e) => {
-                          fileInputRef.current?.click();
-                        }}
-                      />
-                    </HoverItem>
-                  </ToolTip>
-                </>
-              ))}
-            {props.toolbarOptions?.hideAddContext || (
-              <ToolTip place="top" content="Attach Context">
-                <HoverItem onClick={props.onAddContextItem}>
-                  <AtSymbolIcon className="h-3 w-3 hover:brightness-125" />
-                </HoverItem>
-              </ToolTip>
-            )}
-            {supportsReasoning && (
-              <HoverItem
-                onClick={() =>
-                  dispatch(setHasReasoningEnabled(!hasReasoningEnabled))
-                }
-              >
-                <ToolTip
-                  place="top"
-                  content={
-                    hasReasoningEnabled
-                      ? "Disable model reasoning"
-                      : "Enable model reasoning"
-                  }
-                >
-                  {hasReasoningEnabled ? (
-                    <LightBulbIconSolid className="h-3 w-3 brightness-200 hover:brightness-150" />
-                  ) : (
-                    <LightBulbIconOutline className="h-3 w-3 hover:brightness-150" />
-                  )}
-                </ToolTip>
-              </HoverItem>
-            )}
-          </div>
-        </div>
-
-        <div
-          className="text-description flex items-center gap-2 whitespace-nowrap"
-          style={{
-            fontSize: tinyFont,
-          }}
-        >
-          {!isInEdit && <ContextStatus />}
-          {!props.toolbarOptions?.hideUseCodebase && !isInEdit && (
-            <div className="hidden transition-colors duration-200 hover:underline md:flex">
-              <HoverItem
-                className={
-                  props.activeKey === "Meta" ||
-                  props.activeKey === "Control" ||
-                  props.activeKey === "Alt"
-                    ? "underline"
-                    : ""
-                }
-                onClick={(e) =>
-                  props.onEnter?.({
-                    useCodebase: false,
-                    noContext: !useActiveFile,
-                  })
-                }
-              >
-                <ToolTip
-                  place="top-end"
-                  content={`${
-                    useActiveFile
-                      ? "Send Without Active File"
-                      : "Send With Active File"
-                  } (${getMetaKeyLabel()}⏎)`}
-                >
-                  <span>
-                    {getMetaKeyLabel()}⏎{" "}
-                    {useActiveFile ? "No active file" : "Active file"}
-                  </span>
-                </ToolTip>
-              </HoverItem>
-            </div>
-          )}
-          {isInEdit && (
+          {supportsReasoning && (
             <HoverItem
-              className="hidden hover:underline sm:flex"
-              onClick={async () => {
-                void dispatch(exitEdit({}));
-                ideMessenger.post("focusEditor", undefined);
-              }}
+              onClick={() =>
+                dispatch(setHasReasoningEnabled(!hasReasoningEnabled))
+              }
             >
-              <span>
-                <i>Esc</i> to exit Edit
-              </span>
+              <ToolTip
+                place="top"
+                content={
+                  hasReasoningEnabled ? "禁用模型思考" : "启用模型思考"
+                }
+              >
+                {hasReasoningEnabled ? (
+                  <LightBulbIconSolid className="h-3 w-3 brightness-200 hover:brightness-150" />
+                ) : (
+                  <LightBulbIconOutline className="h-3 w-3 hover:brightness-150" />
+                )}
+              </ToolTip>
             </HoverItem>
           )}
-          <ToolTip place="top" content="Send (⏎)">
-            <Button
-              variant={props.isMainInput ? "primary" : "secondary"}
-              size="sm"
-              data-testid="submit-input-button"
-              onClick={async (e) => {
-                if (props.onEnter) {
-                  props.onEnter({
-                    useCodebase: false,
-                    noContext: useActiveFile
-                      ? isMetaEquivalentKeyPressed(e as any) || e.altKey
-                      : !(isMetaEquivalentKeyPressed(e as any) || e.altKey),
-                  });
-                }
-              }}
-              disabled={isEnterDisabled}
-            >
-              <span className="hidden md:inline">
-                ⏎ {props.toolbarOptions?.enterText ?? "Enter"}
-              </span>
-              <span className="md:hidden">⏎</span>
-            </Button>
-          </ToolTip>
         </div>
       </div>
-    </>
-  );
+
+      <div
+        className="text-description flex items-center gap-2 whitespace-nowrap"
+        style={{
+          fontSize: tinyFont,
+        }}
+      >
+        {!isInEdit && <ContextStatus />}
+        {!props.toolbarOptions?.hideUseCodebase && !isInEdit && (
+          <div className="hidden transition-colors duration-200 hover:underline md:flex">
+            <HoverItem
+              className={
+                props.activeKey === "Meta" ||
+                props.activeKey === "Control" ||
+                props.activeKey === "Alt"
+                  ? "underline"
+                  : ""
+              }
+              onClick={(e) =>
+                props.onEnter?.({
+                  useCodebase: false,
+                  noContext: !useActiveFile,
+                })
+              }
+            >
+              <ToolTip
+                place="top-end"
+                content={`${
+                  useActiveFile
+                    ? "不使用当前文件发送"
+                    : "使用当前文件发送"
+                } (${getMetaKeyLabel()}⏎)`}
+              >
+                <span>
+                  {getMetaKeyLabel()}⏎{" "}
+                  {useActiveFile ? "未使用当前文件" : "使用当前文件"}
+                </span>
+              </ToolTip>
+            </HoverItem>
+          </div>
+        )}
+        {isInEdit && (
+          <HoverItem
+            className="hidden hover:underline sm:flex"
+            onClick={async () => {
+              void dispatch(exitEdit({}));
+              ideMessenger.post("focusEditor", undefined);
+            }}
+          >
+            <span>
+              <i>Esc</i> 退出编辑
+            </span>
+          </HoverItem>
+        )}
+        <ToolTip place="top" content="发送 (⏎)">
+          <Button
+            variant={props.isMainInput ? "primary" : "secondary"}
+            size="sm"
+            data-testid="submit-input-button"
+            onClick={async (e) => {
+              if (props.onEnter) {
+                props.onEnter({
+                  useCodebase: false,
+                  noContext: useActiveFile
+                    ? isMetaEquivalentKeyPressed(e as any) || e.altKey
+                    : !(isMetaEquivalentKeyPressed(e as any) || e.altKey),
+                });
+              }
+            }}
+            disabled={isEnterDisabled}
+          >
+            <span className="hidden md:inline">
+              ⏎ {props.toolbarOptions?.enterText ?? "输入"}
+            </span>
+            <span className="md:hidden">⏎</span>
+          </Button>
+        </ToolTip>
+      </div>
+    </div>
+  </>
+);
+
 }
 
 function shallowToolbarOptionsEqual(a?: ToolbarOptions, b?: ToolbarOptions) {

@@ -51,7 +51,7 @@ const BRIEF_LAZY_INSTRUCTIONS = `For larger codeblocks (>20 lines), use brief la
 export const DEFAULT_CHAT_SYSTEM_MESSAGE = `\
 <important_rules>
   You are in chat mode.
-
+  使用中文与我沟通交流。
   If the user asks to make changes to files offer that they can use the Apply Button on the code block, or switch to Agent Mode to make the suggested updates automatically.
   If needed concisely explain to the user they can switch to agent mode using the Mode Selector dropdown and provide no other details.
 

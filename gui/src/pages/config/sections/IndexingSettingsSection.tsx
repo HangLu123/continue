@@ -20,14 +20,14 @@ function CodebaseSubSection() {
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="mb-0 text-sm font-semibold">@codebase index</h3>
+        <h3 className="mb-0 text-sm font-semibold">@codebase 索引</h3>
       </div>
 
       <Card>
         <div className="py-2">
           {config.disableIndexing ? (
             <div className="p-1">
-              <p className="text-center font-semibold">Indexing is disabled</p>
+              <p className="text-center font-semibold">索引功能已禁用</p>
             </div>
           ) : (
             <IndexingProgress />
@@ -57,16 +57,14 @@ function EnableIndexingSetting() {
   return (
     <div className="flex flex-col gap-4">
       <UserSetting
-        title="Enable indexing"
+        title="启用索引"
         type="toggle"
         description={
           <div className="text-foreground">
-            Allows indexing of your codebase for search and context
-            understanding.
+            允许对代码库进行索引，以用于搜索和上下文理解。
             <br />
             <br />
-            Note that indexing can consume significant system resources,
-            especially on larger codebases.
+            请注意，索引过程可能会占用大量系统资源， 尤其是在大型代码库环境中。
           </div>
         }
         value={!disableIndexing}
@@ -83,25 +81,12 @@ export function IndexingSettingsSection() {
 
   return (
     <>
-      <ConfigHeader title="Indexing" />
+      <ConfigHeader title="索引设置" />
 
       <Alert type="warning" className="mb-6">
         <div className="space-y-4">
           <div>
-            <div className="-mt-0.5 text-sm font-medium">
-              Indexing has been deprecated
-            </div>
-            <div className="mt-1 text-xs">
-              Learn how to{" "}
-              <a
-                href="https://docs.continue.dev/guides/codebase-documentation-awareness"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-inherit underline hover:brightness-125"
-              >
-                make your agent aware of your codebase and documentation
-              </a>
-            </div>
+            <div className="-mt-0.5 text-sm font-medium">索引功能已被弃用</div>
           </div>
           <Divider className="border-inherit" />
           <EnableIndexingSetting />

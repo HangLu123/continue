@@ -3,10 +3,10 @@ import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "../builtIn";
 
 export const grepSearchTool: Tool = {
   type: "function",
-  displayTitle: "Grep Search",
-  wouldLikeTo: 'search for "{{{ query }}}"',
-  isCurrently: 'searching for "{{{ query }}}"',
-  hasAlready: 'searched for "{{{ query }}}"',
+  displayTitle: "Grep 搜索",
+  wouldLikeTo: '搜索 "{{{ query }}}"',
+  isCurrently: '正在搜索 "{{{ query }}}"',
+  hasAlready: '已搜索过 "{{{ query }}}"',
   readonly: true,
   isInstant: true,
   group: BUILT_IN_GROUP_NAME,

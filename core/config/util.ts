@@ -85,14 +85,14 @@ export function addModel(
   );
 }
 
-export function deleteModel(title: string) {
+export function deleteModel() {
   editConfigFile(
     (config) => {
-      config.models = config.models.filter((m: any) => m.title !== title);
+      config.models = [];
       return config;
     },
     (config) => {
-      config.models = config.models?.filter((m: any) => m.name !== title);
+      config.models = [];
       return config;
     },
   );

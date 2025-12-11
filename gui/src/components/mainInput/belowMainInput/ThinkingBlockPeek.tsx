@@ -69,13 +69,13 @@ function ThinkingBlockPeek({
           >
             {inProgress ? (
               <span>
-                {redactedThinking ? "Redacted Thinking" : "Thinking"}
+                {redactedThinking ? "删减后的思考" : "正在思考"}
                 <AnimatedEllipsis />
               </span>
             ) : redactedThinking ? (
-              "Redacted Thinking"
+              "删减后的思考"
             ) : (
-              "Thought" +
+              "已思考" +
               (elapsedTime ? ` for ${elapsedTime}` : "") +
               (tokens ? ` (${tokens} tokens)` : "")
             )}

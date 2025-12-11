@@ -94,12 +94,12 @@ function fallbackRender({ error, resetErrorBoundary }: any) {
       className="px-2"
       style={{ backgroundColor: vscBackground }}
     >
-      <p>Something went wrong:</p>
+      <p>发生错误：</p>
       <pre style={{ color: "red" }}>{error.message}</pre>
       <pre style={{ color: lightGray }}>{error.stack}</pre>
 
       <div className="text-center">
-        <Button onClick={resetErrorBoundary}>Restart</Button>
+        <Button onClick={resetErrorBoundary}>重启</Button>
       </div>
     </div>
   );
@@ -495,7 +495,7 @@ export function Chat() {
                   className="flex items-center gap-2"
                 >
                   <ArrowLeftIcon className="h-3 w-3" />
-                  <span className="text-xs">Last Session</span>
+                  <span className="text-xs">上一会话</span>
                 </NewSessionButton>
               )}
             </div>

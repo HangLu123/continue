@@ -6,10 +6,10 @@ import { evaluateFileAccessPolicy } from "../policies/fileAccess";
 
 export const viewSubdirectoryTool: Tool = {
   type: "function",
-  displayTitle: "View Subdirectory",
-  wouldLikeTo: 'view a map of "{{{ directory_path }}}"',
-  isCurrently: 'getting a map of "{{{ directory_path }}}"',
-  hasAlready: 'viewed a map of "{{{ directory_path }}}"',
+  displayTitle: "查看子目录",
+  wouldLikeTo: '查看 "{{{ directory_path }}}" 的结构图',
+  isCurrently: '正在获取 "{{{ directory_path }}}" 的结构图',
+  hasAlready: '已查看 "{{{ directory_path }}}" 的结构图',
   readonly: true,
   group: BUILT_IN_GROUP_NAME,
   isInstant: true,

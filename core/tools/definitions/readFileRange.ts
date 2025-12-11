@@ -6,13 +6,13 @@ import { evaluateFileAccessPolicy } from "../policies/fileAccess";
 
 export const readFileRangeTool: Tool = {
   type: "function",
-  displayTitle: "Read File Range",
+  displayTitle: "读取文件范围",
   wouldLikeTo:
-    "read lines {{{ startLine }}}-{{{ endLine }}} of {{{ filepath }}}",
+    "读取 {{{ filepath }}} 的第 {{{ startLine }}}-{{{ endLine }}} 行",
   isCurrently:
-    "reading lines {{{ startLine }}}-{{{ endLine }}} of {{{ filepath }}}",
+    "正在读取 {{{ filepath }}} 的第 {{{ startLine }}}-{{{ endLine }}} 行",
   hasAlready:
-    "read lines {{{ startLine }}}-{{{ endLine }}} of {{{ filepath }}}",
+    "已读取 {{{ filepath }}} 的第 {{{ startLine }}}-{{{ endLine }}} 行",
   readonly: true,
   isInstant: true,
   group: BUILT_IN_GROUP_NAME,

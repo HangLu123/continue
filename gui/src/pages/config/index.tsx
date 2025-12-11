@@ -70,7 +70,7 @@ function ConfigPage() {
 
           <Divider />
 
-          <AccountDropdown />
+          {/* <AccountDropdown /> */}
         </div>
       </div>
 

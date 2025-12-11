@@ -58,7 +58,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
 
   return (
     <Selector
-      title="Select Model"
+      title="选择模型"
       options={models}
       selectedIndex={selectedIndex}
       loading={loading}

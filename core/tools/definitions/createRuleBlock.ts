@@ -17,10 +17,10 @@ const ALWAYS_APPLY_DESC =
 
 export const createRuleBlock: Tool = {
   type: "function",
-  displayTitle: "Create Rule Block",
-  wouldLikeTo: 'create a rule block for "{{{ name }}}"',
-  isCurrently: 'creating a rule block for "{{{ name }}}"',
-  hasAlready: 'created a rule block for "{{{ name }}}"',
+  displayTitle: "创建规则块",
+  wouldLikeTo: '为 "{{{ name }}}" 创建规则块',
+  isCurrently: '正在为 "{{{ name }}}" 创建规则块',
+  hasAlready: '已为 "{{{ name }}}" 创建规则块',
   readonly: false,
   isInstant: true,
   group: BUILT_IN_GROUP_NAME,

@@ -14,10 +14,10 @@ export interface SingleFindAndReplaceArgs {
 
 export const singleFindAndReplaceTool: Tool = {
   type: "function",
-  displayTitle: "Find and Replace",
-  wouldLikeTo: "edit {{{ filepath }}}",
-  isCurrently: "editing {{{ filepath }}}",
-  hasAlready: "edited {{{ filepath }}}",
+  displayTitle: "查找并替换",
+  wouldLikeTo: "编辑 {{{ filepath }}}",
+  isCurrently: "正在编辑 {{{ filepath }}}",
+  hasAlready: "已编辑 {{{ filepath }}}",
   group: BUILT_IN_GROUP_NAME,
   readonly: false,
   isInstant: false,

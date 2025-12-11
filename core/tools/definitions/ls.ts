@@ -8,9 +8,9 @@ import { evaluateFileAccessPolicy } from "../policies/fileAccess";
 export const lsTool: Tool = {
   type: "function",
   displayTitle: "ls",
-  wouldLikeTo: "list files in {{{ dirPath }}}",
-  isCurrently: "listing files in {{{ dirPath }}}",
-  hasAlready: "listed files in {{{ dirPath }}}",
+  wouldLikeTo: "列出 {{{ dirPath }}} 中的文件",
+  isCurrently: "正在列出 {{{ dirPath }}} 中的文件",
+  hasAlready: "已列出 {{{ dirPath }}} 中的文件",
   readonly: true,
   isInstant: true,
   group: BUILT_IN_GROUP_NAME,

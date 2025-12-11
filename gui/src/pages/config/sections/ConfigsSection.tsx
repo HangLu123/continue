@@ -24,9 +24,9 @@ export function ConfigsSection() {
   return (
     <>
       <ConfigHeader
-        title="Configs"
+        title="配置列表"
         onAddClick={handleAddConfig}
-        addButtonTooltip="Add config"
+        addButtonTooltip="添加配置"
       />
 
       <Card>
@@ -73,7 +73,14 @@ export function ConfigsSection() {
                                 error.fatal
                                   ? "text-error bg-error/10"
                                   : "bg-yellow-500/10 text-yellow-500"
-                              } break-all rounded border border-solid border-transparent px-2 py-1 text-xs ${error.uri ? "cursor-pointer " + (error.fatal ? "hover:border-error" : "hover:border-yellow-500") : ""}`}
+                              } break-all rounded border border-solid border-transparent px-2 py-1 text-xs ${
+                                error.uri
+                                  ? "cursor-pointer " +
+                                    (error.fatal
+                                      ? "hover:border-error"
+                                      : "hover:border-yellow-500")
+                                  : ""
+                              }`}
                             >
                               {error.message}
                             </div>
@@ -82,7 +89,7 @@ export function ConfigsSection() {
                       )}
                     </div>
                   </div>
-                  <ToolTip content="Open configuration">
+                  <ToolTip content="打开配置">
                     <Button
                       onClick={() => handleConfigureAgent(profile.id)}
                       variant="ghost"
@@ -98,7 +105,7 @@ export function ConfigsSection() {
             );
           })
         ) : (
-          <EmptyState message="No agents configured. Click the + button to add your first agent." />
+          <EmptyState message="暂无已配置的代理。点击右上角的 + 按钮添加你的第一个代理。" />
         )}
       </Card>
     </>

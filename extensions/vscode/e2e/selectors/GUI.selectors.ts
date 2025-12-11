@@ -148,15 +148,15 @@ export class GUISelectors {
   }
 
   public static getHistoryNavButton(view: WebView) {
-    return SelectorUtils.getElementByAriaLabel(view, "View History");
+    return SelectorUtils.getElementByAriaLabel(view, "查看历史记录");
   }
 
   public static getSettingsNavButton(view: WebView) {
-    return SelectorUtils.getElementByAriaLabel(view, "Open Settings");
+    return SelectorUtils.getElementByAriaLabel(view, "设置");
   }
 
   public static getNewSessionNavButton(view: WebView) {
-    return SelectorUtils.getElementByAriaLabel(view, "New Session");
+    return SelectorUtils.getElementByAriaLabel(view, "新建对话");
   }
 
   public static async getInputBoxCodeBlockAtIndex(

@@ -3,10 +3,10 @@ import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "../builtIn";
 
 export const fetchUrlContentTool: Tool = {
   type: "function",
-  displayTitle: "Read URL",
-  wouldLikeTo: "fetch {{{ url }}}",
-  isCurrently: "fetching {{{ url }}}",
-  hasAlready: "fetched {{{ url }}}",
+  displayTitle: "读取 URL",
+  wouldLikeTo: "获取 {{{ url }}}",
+  isCurrently: "正在获取 {{{ url }}}",
+  hasAlready: "已获取 {{{ url }}}",
   readonly: true,
   isInstant: true,
   group: BUILT_IN_GROUP_NAME,

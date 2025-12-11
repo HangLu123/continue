@@ -3,10 +3,10 @@ import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "../builtIn";
 
 export const readCurrentlyOpenFileTool: Tool = {
   type: "function",
-  displayTitle: "Read Currently Open File",
-  wouldLikeTo: "read the current file",
-  isCurrently: "reading the current file",
-  hasAlready: "read the current file",
+  displayTitle: "读取当前打开的文件",
+  wouldLikeTo: "读取当前文件",
+  isCurrently: "正在读取当前文件",
+  hasAlready: "读取当前文件",
   readonly: true,
   isInstant: true,
   group: BUILT_IN_GROUP_NAME,

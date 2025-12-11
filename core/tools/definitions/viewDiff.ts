@@ -4,10 +4,10 @@ import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "../builtIn";
 
 export const viewDiffTool: Tool = {
   type: "function",
-  displayTitle: "View Diff",
-  wouldLikeTo: "view the git diff",
-  isCurrently: "getting the git diff",
-  hasAlready: "viewed the git diff",
+  displayTitle: "查看差异",
+  wouldLikeTo: "查看 Git diff",
+  isCurrently: "正在获取 Git diff",
+  hasAlready: "已查看 Git diff",
   readonly: true,
   isInstant: true,
   group: BUILT_IN_GROUP_NAME,

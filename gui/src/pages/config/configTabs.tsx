@@ -40,7 +40,7 @@ export const topTabSections: TabSection[] = [
     tabs: [
       {
         id: "back",
-        label: "Back",
+        label: "返回",
         component: <div />,
         icon: <ArrowLeftIcon className="xs:h-4 xs:w-4 h-3 w-3 flex-shrink-0" />,
       },
@@ -52,7 +52,7 @@ export const topTabSections: TabSection[] = [
     tabs: [
       {
         id: "models",
-        label: "Models",
+        label: "模型",
         component: (
           <ConfigSection>
             <ModelsSection />
@@ -62,7 +62,7 @@ export const topTabSections: TabSection[] = [
       },
       {
         id: "rules",
-        label: "Rules",
+        label: "规则",
         component: (
           <ConfigSection>
             <RulesSection />
@@ -72,7 +72,7 @@ export const topTabSections: TabSection[] = [
       },
       {
         id: "tools",
-        label: "Tools",
+        label: "工具",
         component: (
           <ConfigSection>
             <ToolsSection />
@@ -90,43 +90,13 @@ export const topTabSections: TabSection[] = [
     tabs: [
       {
         id: "configs",
-        label: "Configs",
+        label: "配置",
         component: (
           <ConfigSection>
             <ConfigsSection />
           </ConfigSection>
         ),
         icon: <DocumentIcon className="xs:h-4 xs:w-4 h-3 w-3 flex-shrink-0" />,
-      },
-      {
-        id: "organizations",
-        label: "Organizations",
-        component: (
-          <ConfigSection>
-            <OrganizationsSection />
-          </ConfigSection>
-        ),
-        icon: (
-          <BuildingOfficeIcon className="xs:h-4 xs:w-4 h-3 w-3 flex-shrink-0" />
-        ),
-      },
-    ],
-  },
-  {
-    id: "indexing",
-    showTopDivider: true,
-    tabs: [
-      {
-        id: "indexing",
-        label: "Indexing",
-        component: (
-          <ConfigSection>
-            <IndexingSettingsSection />
-          </ConfigSection>
-        ),
-        icon: (
-          <CircleStackIcon className="xs:h-4 xs:w-4 h-3 w-3 flex-shrink-0" />
-        ),
       },
     ],
   },
@@ -138,25 +108,13 @@ export const bottomTabSections: TabSection[] = [
     tabs: [
       {
         id: "settings",
-        label: "Settings",
+        label: "设置",
         component: (
           <ConfigSection>
             <UserSettingsSection />
           </ConfigSection>
         ),
         icon: <Cog6ToothIcon className="xs:h-4 xs:w-4 h-3 w-3 flex-shrink-0" />,
-      },
-      {
-        id: "help",
-        label: "Help",
-        component: (
-          <ConfigSection>
-            <HelpSection />
-          </ConfigSection>
-        ),
-        icon: (
-          <QuestionMarkCircleIcon className="xs:h-4 xs:w-4 h-3 w-3 flex-shrink-0" />
-        ),
       },
     ],
   },

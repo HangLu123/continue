@@ -4,7 +4,7 @@ import { joinPathsToUri } from "../util/uri";
 const DEFAULT_ASSISTANT_FILE = `# This is an example configuration file
 # To learn more, see the full config.yaml reference: https://docs.continue.dev/reference
 
-name: Example Config
+name: 配置示例
 version: 1.0.0
 schema: v1
 

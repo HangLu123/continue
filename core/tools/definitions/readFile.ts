@@ -6,10 +6,10 @@ import { evaluateFileAccessPolicy } from "../policies/fileAccess";
 
 export const readFileTool: Tool = {
   type: "function",
-  displayTitle: "Read File",
-  wouldLikeTo: "read {{{ filepath }}}",
-  isCurrently: "reading {{{ filepath }}}",
-  hasAlready: "read {{{ filepath }}}",
+  displayTitle: "读取文件",
+  wouldLikeTo: "读取 {{{ filepath }}}",
+  isCurrently: "正在读取 {{{ filepath }}}",
+  hasAlready: "已读取 {{{ filepath }}}",
   readonly: true,
   isInstant: true,
   group: BUILT_IN_GROUP_NAME,

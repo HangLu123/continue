@@ -39,10 +39,10 @@ function getRequestRuleSystemMessageDescription(
 
 export const requestRuleTool: GetTool = ({ rules }) => ({
   type: "function",
-  displayTitle: "Request Rules",
-  wouldLikeTo: "request rule {{{ name }}}",
-  isCurrently: "reading rule {{{ name }}}",
-  hasAlready: "read rule {{{ name }}}",
+  displayTitle: "请求规则",
+  wouldLikeTo: "请求规则 {{{ name }}}",
+  isCurrently: "正在读取规则 {{{ name }}}",
+  hasAlready: "已读取规则 {{{ name }}}",
   group: BUILT_IN_GROUP_NAME,
   readonly: false,
   function: {

@@ -95,7 +95,7 @@ export function ModeSelect() {
           zIndex: 200001, // in front of listbox
         }}
         className="flex items-center gap-1"
-        content={`${mode} might not work well with this model.`}
+        content={`${mode} 与当前模型可能不太兼容。`}
       >
         <ExclamationTriangleIcon className="text-warning h-2.5 w-2.5" />
       </ToolTip>
@@ -112,29 +112,26 @@ export function ModeSelect() {
           <ModeIcon mode={mode} />
           <span className="hidden sm:block">
             {mode === "chat"
-              ? "Chat"
+              ? "聊天"
               : mode === "agent"
-                ? "Agent"
+                ? "代理"
                 : mode === "background"
-                  ? "Background"
-                  : "Plan"}
+                  ? "后台"
+                  : "规划"}
           </span>
           <ChevronDownIcon
             className="h-2 w-2 flex-shrink-0"
             aria-hidden="true"
           />
         </ListboxButton>
+
         <ListboxOptions className="min-w-32 max-w-48">
+          {/* Chat */}
           <ListboxOption value="chat">
             <div className="flex flex-row items-center gap-1.5">
               <ModeIcon mode="chat" />
-              <span className="">Chat</span>
-              <ToolTip
-                style={{
-                  zIndex: 200001,
-                }}
-                content="All tools disabled"
-              >
+              <span>聊天</span>
+              <ToolTip style={{ zIndex: 200001 }} content="所有工具均已禁用">
                 <InformationCircleIcon
                   data-tooltip-id="chat-tip"
                   className="h-2.5 w-2.5 flex-shrink-0"
@@ -148,44 +145,38 @@ export function ModeSelect() {
             </div>
             {mode === "chat" && <CheckIcon className="ml-auto h-3 w-3" />}
           </ListboxOption>
+
+          {/* Plan */}
           <ListboxOption value="plan" className={"gap-1"}>
             <div className="flex flex-row items-center gap-1.5">
               <ModeIcon mode="plan" />
-              <span className="">Plan</span>
-              <ToolTip
-                style={{
-                  zIndex: 200001,
-                }}
-                content="Read-only/MCP tools available"
-              >
+              <span>规划</span>
+              <ToolTip style={{ zIndex: 200001 }} content="只读/MCP 工具可用">
                 <InformationCircleIcon className="h-2.5 w-2.5 flex-shrink-0" />
               </ToolTip>
             </div>
-            {!isGoodAtAgentMode && notGreatAtAgent("Plan")}
+            {!isGoodAtAgentMode && notGreatAtAgent("规划")}
             <CheckIcon
               className={`ml-auto h-3 w-3 ${mode === "plan" ? "" : "opacity-0"}`}
             />
           </ListboxOption>
 
+          {/* Agent */}
           <ListboxOption value="agent" className={"gap-1"}>
             <div className="flex flex-row items-center gap-1.5">
               <ModeIcon mode="agent" />
-              <span className="">Agent</span>
-              <ToolTip
-                style={{
-                  zIndex: 200001,
-                }}
-                content="All tools available"
-              >
+              <span>代理</span>
+              <ToolTip style={{ zIndex: 200001 }} content="全部工具可用">
                 <InformationCircleIcon className="h-2.5 w-2.5 flex-shrink-0" />
               </ToolTip>
             </div>
-            {!isGoodAtAgentMode && notGreatAtAgent("Agent")}
+            {!isGoodAtAgentMode && notGreatAtAgent("代理")}
             <CheckIcon
               className={`ml-auto h-3 w-3 ${mode === "agent" ? "" : "opacity-0"}`}
             />
           </ListboxOption>
 
+          {/* Background */}
           <ListboxOption
             value="background"
             className={"gap-1"}
@@ -193,12 +184,10 @@ export function ModeSelect() {
           >
             <div className="flex flex-row items-center gap-1.5">
               <ModeIcon mode="background" />
-              <span className="">Background</span>
+              <span>后台</span>
               <ToolTip
-                style={{
-                  zIndex: 200001,
-                }}
-                content={"Background mode cannot be used with local agents."}
+                style={{ zIndex: 200001 }}
+                content={"本地代理无法使用后台模式。"}
               >
                 <InformationCircleIcon className="h-2.5 w-2.5 flex-shrink-0" />
               </ToolTip>
@@ -211,8 +200,9 @@ export function ModeSelect() {
             />
           </ListboxOption>
 
+          {/* Hint */}
           <div className="text-description-muted px-2 py-1">
-            {`${metaKeyLabel} . for next mode`}
+            {`${metaKeyLabel} . 切换到下一个模式`}
           </div>
         </ListboxOptions>
       </div>

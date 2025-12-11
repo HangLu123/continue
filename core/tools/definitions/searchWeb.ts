@@ -4,10 +4,10 @@ import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "../builtIn";
 
 export const searchWebTool: Tool = {
   type: "function",
-  displayTitle: "Search Web",
-  wouldLikeTo: 'search the web for "{{{ query }}}"',
-  isCurrently: 'searching the web for "{{{ query }}}"',
-  hasAlready: 'searched the web for "{{{ query }}}"',
+  displayTitle: "搜索网页",
+  wouldLikeTo: '搜索网页内容："{{{ query }}}"',
+  isCurrently: '正在搜索网页内容："{{{ query }}}"',
+  hasAlready: '已搜索过网页内容："{{{ query }}}"',
   readonly: true,
   group: BUILT_IN_GROUP_NAME,
   function: {

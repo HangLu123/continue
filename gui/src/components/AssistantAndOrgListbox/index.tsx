@@ -155,7 +155,7 @@ export function AssistantAndOrgListbox({
           >
             <div className="flex items-center justify-between px-1.5 py-1">
               <span className="text-description text-xs font-medium">
-                Configs
+                配置
               </span>
               <div className="flex items-center gap-0.5">
                 <Button
@@ -188,45 +188,6 @@ export function AssistantAndOrgListbox({
               onClose={close}
             />
 
-            {shouldRenderOrgInfo && (
-              <>
-                <Divider className="!mb-0.5 !mt-0" />
-                <div className="flex items-center justify-between px-1.5 py-1">
-                  <span className="text-description text-xs font-medium">
-                    Organizations
-                  </span>
-                  <div className="flex items-center gap-0.5">
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onNewOrganization();
-                      }}
-                      variant="ghost"
-                      size="sm"
-                      className="my-0 h-5 w-5 p-0"
-                    >
-                      <PlusIcon className="text-description h-3.5 w-3.5" />
-                    </Button>
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onOrganizationsConfig();
-                      }}
-                      variant="ghost"
-                      size="sm"
-                      className="my-0 h-5 w-5 p-0"
-                    >
-                      <Cog6ToothIcon className="text-description h-3.5 w-3.5" />
-                    </Button>
-                  </div>
-                </div>
-
-                <OrganizationOptions onClose={close} />
-
-                <Divider className="!mb-0 mt-0.5" />
-              </>
-            )}
-
             {/* Settings Section */}
             {variant !== "sidebar" && (
               <div>
@@ -246,43 +207,9 @@ export function AssistantAndOrgListbox({
                         configLoading && "animate-spin-slow",
                       )}
                     />
-                    <span className="text-2xs">Reload</span>
+                    <span className="text-2xs">重新加载</span>
                   </div>
                 </Button>
-                {session ? (
-                  <Button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      logout();
-                      close();
-                    }}
-                    variant="ghost"
-                    size="sm"
-                    className="text-description hover:bg-input my-0 w-full justify-start py-1.5 pl-1 text-left"
-                  >
-                    <div className="flex w-full items-center">
-                      <ArrowRightStartOnRectangleIcon className="ml-1.5 mr-2 h-3.5 w-3.5 flex-shrink-0" />
-                      <span className="text-2xs">Log out</span>
-                    </div>
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      login(false);
-                      close();
-                    }}
-                    variant="ghost"
-                    size="sm"
-                    className="text-description hover:bg-input my-0 w-full justify-start py-1.5 pl-1 text-left"
-                  >
-                    <div className="flex w-full items-center">
-                      <ArrowRightStartOnRectangleIcon className="ml-1.5 mr-2 h-3.5 w-3.5 flex-shrink-0 rotate-180" />
-                      <span className="text-2xs">Log in</span>
-                    </div>
-                  </Button>
-                )}
-
                 <Divider className="!mt-0" />
               </div>
             )}
@@ -291,7 +218,7 @@ export function AssistantAndOrgListbox({
             <div>
               <div className="text-description flex items-center justify-start px-2 py-1">
                 <span className="block" style={{ fontSize: tinyFont }}>
-                  <code>{getMetaKeyLabel()} ⇧ '</code> to toggle config
+                  <code>{getMetaKeyLabel()} ⇧ '</code> 切换配置
                 </span>
               </div>
             </div>

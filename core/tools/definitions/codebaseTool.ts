@@ -3,10 +3,10 @@ import { BUILT_IN_GROUP_NAME, BuiltInToolNames } from "../builtIn";
 
 export const codebaseTool: Tool = {
   type: "function",
-  displayTitle: "Codebase Search",
-  wouldLikeTo: "search the codebase for: {{{ query }}}",
-  isCurrently: "searching the codebase for: {{{ query }}}",
-  hasAlready: "searched the codebase for: {{{ query }}}",
+  displayTitle: "代码库搜索",
+  wouldLikeTo: "想要在代码库中搜索：{{{ query }}}",
+  isCurrently: "正在代码库中搜索：{{{ query }}}",
+  hasAlready: "已在代码库中搜索过：{{{ query }}}",
   readonly: true,
   isInstant: false,
   group: BUILT_IN_GROUP_NAME,

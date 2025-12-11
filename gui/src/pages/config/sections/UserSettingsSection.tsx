@@ -107,31 +107,31 @@ export function UserSettingsSection() {
   return (
     <div>
       <div className="flex flex-col">
-        <ConfigHeader title="User Settings" />
+        <ConfigHeader title="用户设置" />
         <div className="space-y-6">
           {/* Chat Interface Settings */}
           <div>
-            <ConfigHeader title="Chat" variant="sm" />
+            <ConfigHeader title="聊天界面" variant="sm" />
             <Card>
               <div className="flex flex-col gap-4">
                 <UserSetting
                   type="toggle"
-                  title="Show Session Tabs"
-                  description="Displays tabs above the chat as an alternative way to organize and access your sessions."
+                  title="显示会话标签页"
+                  description="在聊天窗口上方显示标签页，用于组织和切换不同的对话。"
                   value={showSessionTabs}
                   onChange={(value) => handleUpdate({ showSessionTabs: value })}
                 />
                 <UserSetting
                   type="toggle"
-                  title="Wrap Codeblocks"
-                  description="Wraps long lines in code blocks instead of showing horizontal scroll."
+                  title="代码块自动换行"
+                  description="长代码行将自动换行，而不是出现水平滚动条。"
                   value={codeWrap}
                   onChange={(value) => handleUpdate({ codeWrap: value })}
                 />
                 <UserSetting
                   type="toggle"
-                  title="Show Chat Scrollbar"
-                  description="Enables a scrollbar in the chat window."
+                  title="显示聊天滚动条"
+                  description="在聊天窗口中显示滚动条。"
                   value={showChatScrollbar}
                   onChange={(value) =>
                     handleUpdate({ showChatScrollbar: value })
@@ -139,15 +139,15 @@ export function UserSettingsSection() {
                 />
                 <UserSetting
                   type="toggle"
-                  title="Text-to-Speech Output"
-                  description="Reads LLM responses aloud with TTS."
+                  title="语音朗读回复"
+                  description="使用文本转语音朗读模型的回复内容。"
                   value={readResponseTTS}
                   onChange={(value) => handleUpdate({ readResponseTTS: value })}
                 />
                 <UserSetting
                   type="toggle"
-                  title="Enable Session Titles"
-                  description="Generates summary titles for each chat session after the first message, using the current Chat model."
+                  title="启用会话标题"
+                  description="在每个会话的第一条消息后自动生成摘要标题（基于当前聊天模型）。"
                   value={!disableSessionTitles}
                   onChange={(value) =>
                     handleUpdate({ disableSessionTitles: !value })
@@ -155,8 +155,8 @@ export function UserSettingsSection() {
                 />
                 <UserSetting
                   type="toggle"
-                  title="Format Markdown"
-                  description="If off, shows responses as raw text."
+                  title="格式化 Markdown"
+                  description="关闭后将以原始文本显示回复内容。"
                   value={!displayRawMarkdown}
                   onChange={(value) =>
                     handleUpdate({ displayRawMarkdown: !value })
@@ -168,13 +168,13 @@ export function UserSettingsSection() {
 
           {/* Telemetry Settings */}
           <div>
-            <ConfigHeader title="Telemetry" variant="sm" />
+            <ConfigHeader title="遥测" variant="sm" />
             <Card>
               <div className="flex flex-col gap-4">
                 <UserSetting
                   type="toggle"
-                  title="Allow Anonymous Telemetry"
-                  description="Allows Continue to send anonymous telemetry."
+                  title="允许匿名遥测"
+                  description="允许 Continue 发送匿名的使用数据。"
                   value={allowAnonymousTelemetry}
                   disabled={disableTelemetryToggle}
                   onChange={(value) =>
@@ -187,13 +187,13 @@ export function UserSettingsSection() {
 
           {/* Appearance Settings */}
           <div>
-            <ConfigHeader title="Appearance" variant="sm" />
+            <ConfigHeader title="外观" variant="sm" />
             <Card>
               <div className="flex flex-col gap-4">
                 <UserSetting
                   type="number"
-                  title="Font Size"
-                  description="Specifies base font size for UI elements."
+                  title="字体大小"
+                  description="设置 UI 元素的基础字体大小。"
                   value={fontSize}
                   onChange={(val) => {
                     setLocalStorage("fontSize", val);
@@ -208,13 +208,13 @@ export function UserSettingsSection() {
 
           {/* Autocomplete Settings */}
           <div>
-            <ConfigHeader title="Autocomplete" variant="sm" />
+            <ConfigHeader title="自动补全" variant="sm" />
             <Card>
               <div className="flex flex-col gap-4">
                 <UserSetting
                   type="select"
-                  title="Multiline Autocompletions"
-                  description="Controls multiline completions for autocomplete."
+                  title="多行补全"
+                  description="控制自动补全是否允许多行内容。"
                   value={useAutocompleteMultilineCompletions}
                   onChange={(value) =>
                     handleUpdate({
@@ -225,15 +225,15 @@ export function UserSettingsSection() {
                     })
                   }
                   options={[
-                    { label: "Auto", value: "auto" },
-                    { label: "Always", value: "always" },
-                    { label: "Never", value: "never" },
+                    { label: "自动", value: "auto" },
+                    { label: "总是开启", value: "always" },
+                    { label: "关闭", value: "never" },
                   ]}
                 />
                 <UserSetting
                   type="number"
-                  title="Autocomplete Timeout (ms)"
-                  description="Maximum time in milliseconds for autocomplete request/retrieval."
+                  title="补全超时（毫秒）"
+                  description="自动补全请求允许的最大时间。"
                   value={modelTimeout}
                   onChange={(val) => handleUpdate({ modelTimeout: val })}
                   min={100}
@@ -241,8 +241,8 @@ export function UserSettingsSection() {
                 />
                 <UserSetting
                   type="number"
-                  title="Autocomplete Debounce (ms)"
-                  description="Minimum time in milliseconds to trigger an autocomplete request after a change."
+                  title="补全防抖（毫秒）"
+                  description="触发补全前需要等待的最小输入间隔时间。"
                   value={debounceDelay}
                   onChange={(val) => handleUpdate({ debounceDelay: val })}
                   min={0}
@@ -250,8 +250,8 @@ export function UserSettingsSection() {
                 />
                 <UserSetting
                   type="input"
-                  title="Disable autocomplete in files"
-                  description="List of comma-separated glob pattern to disable autocomplete in matching files."
+                  title="在以下文件中禁用补全"
+                  description="输入以逗号分隔的 glob 匹配模式，将在匹配的文件中禁用自动补全。"
                   placeholder="**/*.(txt,md)"
                   value={formDisableAutocomplete}
                   onChange={setFormDisableAutocomplete}
@@ -268,18 +268,18 @@ export function UserSettingsSection() {
 
           {/* Experimental Settings */}
           <div>
-            <ConfigHeader title="Experimental" variant="sm" />
+            <ConfigHeader title="实验性功能" variant="sm" />
             <Card>
               <Toggle
                 isOpen={showExperimental}
                 onToggle={() => setShowExperimental(!showExperimental)}
-                title="Show Experimental Settings"
+                title="显示实验性设置"
               >
                 <div className="flex flex-col gap-x-1 gap-y-4">
                   <UserSetting
                     type="toggle"
-                    title="Add Current File by Default"
-                    description=" the currently open file is added as context in every new conversation."
+                    title="默认添加当前文件"
+                    description="在每次新对话中，默认将当前打开的文件作为上下文添加。"
                     value={useCurrentFileAsContext}
                     onChange={(value) =>
                       handleUpdate({ useCurrentFileAsContext: value })
@@ -287,8 +287,8 @@ export function UserSettingsSection() {
                   />
                   <UserSetting
                     type="toggle"
-                    title="Enable experimental tools"
-                    description=" enables access to experimental tools that are still in development."
+                    title="启用实验性工具"
+                    description="允许使用仍在开发中的实验性工具。"
                     value={enableExperimentalTools}
                     onChange={(value) =>
                       handleUpdate({ enableExperimentalTools: value })
@@ -296,8 +296,8 @@ export function UserSettingsSection() {
                   />
                   <UserSetting
                     type="toggle"
-                    title="Only use system message tools"
-                    description=" Continue will not attempt to use native tool calling and will only use system message tools."
+                    title="仅使用系统消息工具"
+                    description="Continue 将不会尝试原生工具调用，只会使用系统消息工具。"
                     value={onlyUseSystemMessageTools}
                     onChange={(value) =>
                       handleUpdate({ onlyUseSystemMessageTools: value })
@@ -305,8 +305,8 @@ export function UserSettingsSection() {
                   />
                   <UserSetting
                     type="toggle"
-                    title="@Codebase: use tool calling only"
-                    description=" @codebase context provider will only use tool calling for code retrieval."
+                    title="@Codebase：仅使用工具调用"
+                    description="@codebase 上下文仅会使用工具调用来检索代码。"
                     value={codebaseToolCallingOnly}
                     onChange={(value) =>
                       handleUpdate({ codebaseToolCallingOnly: value })
@@ -314,8 +314,8 @@ export function UserSettingsSection() {
                   />
                   <UserSetting
                     type="toggle"
-                    title="Stream after tool rejection"
-                    description=" streaming will continue after the tool call is rejected."
+                    title="工具拒绝后继续流式输出"
+                    description="当工具调用被拒绝时，模型仍会继续输出内容。"
                     value={continueAfterToolRejection}
                     onChange={(value) =>
                       handleUpdate({ continueAfterToolRejection: value })

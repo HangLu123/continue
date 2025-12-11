@@ -77,7 +77,7 @@ export function BlockSettingsTopToolbar() {
     <div className="flex flex-1 items-center justify-between gap-3">
       <div className="flex items-center gap-1">
         {shouldShowError && (
-          <ToolTip delayShow={700} content="View configuration errors">
+          <ToolTip delayShow={700} content="查看配置错误">
             <div
               role="button"
               tabIndex={0}
@@ -102,7 +102,7 @@ export function BlockSettingsTopToolbar() {
         {!hasActiveContent && (
           <div className="flex items-center gap-1.5">
             {isUsingFreeTrial && (
-              <ToolTip content="View remaining starter credits">
+              <ToolTip content="查看剩余试用额度">
                 <StarterCreditsPopover
                   creditStatus={creditStatus}
                   refreshCreditStatus={refreshCreditStatus}
@@ -114,19 +114,19 @@ export function BlockSettingsTopToolbar() {
               </ToolTip>
             )}
 
-            <ToolTip content="Configure rules">
+            <ToolTip content="配置规则">
               <HoverItem onClick={handleRulesClick} px={2}>
                 <PencilIcon className="text-description-muted h-3 w-3 hover:brightness-125" />
               </HoverItem>
             </ToolTip>
 
-            <ToolTip content="Configure tools">
+            <ToolTip content="配置工具">
               <HoverItem onClick={handleToolsClick} px={2}>
                 <WrenchScrewdriverIcon className="text-description-muted h-3 w-3 hover:brightness-125" />
               </HoverItem>
             </ToolTip>
 
-            <ToolTip content="Configure models">
+            <ToolTip content="配置模型">
               <HoverItem onClick={handleModelsClick} px={2}>
                 <CubeIcon className="text-description-muted h-3 w-3 hover:brightness-125" />
               </HoverItem>
@@ -135,7 +135,7 @@ export function BlockSettingsTopToolbar() {
         )}
       </div>
 
-      <ToolTip place="top" content="Select Config">
+      <ToolTip place="top" content="选择配置">
         <div>
           <AssistantAndOrgListbox variant="lump" />
         </div>
