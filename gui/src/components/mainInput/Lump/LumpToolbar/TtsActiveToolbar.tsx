@@ -30,7 +30,7 @@ export function TtsActiveToolbar() {
           ideMessenger.post("tts/kill", undefined);
         }}
       >
-        ■ Stop TTS
+        ■ 停止 TTS
       </StopButton>
     </Container>
   );

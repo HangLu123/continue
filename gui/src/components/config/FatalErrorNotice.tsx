@@ -32,28 +32,17 @@ export const FatalErrorIndicator = () => {
   const displayName = selectedProfile
     ? (selectedProfile.title ??
       `${selectedProfile.fullSlug?.ownerSlug}/${selectedProfile.fullSlug?.packageSlug}`)
-    : "config";
+    : "配置文件";
 
   return (
     <Alert type="error" className="mx-2 my-1 px-2">
-      <span>{`Error loading`}</span>{" "}
+      <span>加载失败：</span>{" "}
       <span className="italic">{displayName}</span>
-      {". "}
-      <span>{`Chat is disabled until a model is available.`}</span>
+      {"。 "}
+      <span>在可用模型之前，聊天功能已被禁用。</span>
       <div className="mt-2 flex flex-row flex-wrap items-center gap-x-3 gap-y-1.5">
-        <div
-          onClick={() => {
-            ideMessenger.post(
-              "openUrl",
-              "https://docs.continue.dev/troubleshooting",
-            );
-          }}
-          className="cursor-pointer underline"
-        >
-          Help
-        </div>
         {configLoading ? (
-          <div>Reloading...</div>
+          <div>重新加载中...</div>
         ) : (
           <div
             className={`cursor-pointer underline`}
@@ -61,12 +50,12 @@ export const FatalErrorIndicator = () => {
               refreshProfiles("Clicked reload in fatal indicator");
             }}
           >
-            Reload
+            重新加载
           </div>
         )}
         {currentPath !== CONFIG_ROUTES.CONFIGS && (
           <div onClick={showConfigPage} className="cursor-pointer underline">
-            View
+            查看配置
           </div>
         )}
       </div>

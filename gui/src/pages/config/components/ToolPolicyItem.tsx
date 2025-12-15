@@ -164,10 +164,10 @@ export function ToolPolicyItem(props: ToolPolicyItemProps) {
         </div>
         <Tooltip id={disabledTooltipId}>
           {mode === "chat"
-            ? "Tool disabled in chat mode"
+            ? "聊天模式下工具已禁用"
             : !props.isGroupEnabled
-              ? "Group is turned off"
-              : "Tool disabled in plan mode"}
+              ? "组已关闭"
+              : "计划模式下工具已禁用"}
         </Tooltip>
       </div>
       <div

@@ -36,9 +36,9 @@ export function InputScreen({
     <div className="px-2 pb-2 pt-4 sm:px-4">
       <div>
         <div className="text-center">
-          <h2 className="mb-0">Generate Rule</h2>
+          <h2 className="mb-0">生成规则</h2>
           <p className="text-description m-0 mt-2 p-0">
-            This will generate a new rule using the content of your chat history
+            这将根据你的聊天记录内容生成一个新规则
           </p>
         </div>
         <div className="mt-5">
@@ -57,7 +57,7 @@ export function InputScreen({
             <div className="flex flex-col gap-2">
               <textarea
                 className="border-input-border bg-input text-input-foreground placeholder:text-input-placeholder focus:border-border-focus box-border w-full resize-none rounded border p-2 text-xs focus:outline-none"
-                placeholder="Describe your rule..."
+                placeholder="描述你想要创建的规则..."
                 rows={5}
                 value={inputPrompt}
                 onChange={(e) => onInputChange(e.target.value)}
@@ -72,17 +72,17 @@ export function InputScreen({
                   onClick={onCancel}
                   variant="outline"
                 >
-                  Cancel
+                  取消
                 </Button>
                 <Button className="min-w-16" disabled={!inputPrompt.trim()}>
-                  Generate
+                  生成
                 </Button>
               </div>
               <span
                 className="text-description cursor-pointer text-xs underline"
                 onClick={onManualWrite}
               >
-                Or, write a rule from scratch
+                或者，从零开始编写规则
               </span>
             </div>
           </form>

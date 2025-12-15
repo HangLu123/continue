@@ -1,8 +1,8 @@
 import {
   ArrowDownOnSquareIcon,
+  CloudIcon,
   PencilSquareIcon,
   TrashIcon,
-  CloudIcon,
 } from "@heroicons/react/24/outline";
 import { BaseSessionMetadata } from "core";
 import type { RemoteSessionMetadata } from "core/control-plane/client";
@@ -48,7 +48,7 @@ export function HistoryTableRow({
   }, [sessionMetadata]);
 
   const shareSession = async (sessionId: string) => {
-    // "session/share" is not supported in JetBrains yet
+    // JetBrains 暂不支持 "session/share"
     if (shareSessionSupported) {
       await ideMessenger.request("session/share", {
         sessionId,
@@ -60,15 +60,14 @@ export function HistoryTableRow({
   const handleKeyUp = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (sessionTitleEditValue !== sessionMetadata.title) {
-        // Don't allow editing remote sessions
+        // 不允许编辑远程会话
         if (isRemote) {
           setSessionTitleEditValue(sessionMetadata.title);
           setEditing(false);
           return;
         }
 
-        // imperfect solution of loading session just to update it
-        // but fine for now, pretty low latency
+        // 临时方案：为更新标题而重新加载一次，但延迟很小
         const currentSession = await getSession(
           ideMessenger,
           sessionMetadata.sessionId,
@@ -94,7 +93,7 @@ export function HistoryTableRow({
       data-testid={`history-row-${index}`}
       className="hover:bg-input relative mb-2 box-border flex w-full cursor-pointer overflow-hidden rounded-lg p-3"
       onClick={async () => {
-        // Handle remote sessions - load remote session data
+        // 远程会话：加载远程数据
         if (isRemote) {
           const remoteSession = sessionMetadata as RemoteSessionMetadata;
           await dispatch(exitEdit({}));
@@ -108,7 +107,7 @@ export function HistoryTableRow({
           return;
         }
 
-        // Handle local sessions - load and navigate as before
+        // 本地会话：按原逻辑加载
         await dispatch(exitEdit({}));
         if (sessionMetadata.sessionId !== currentSessionId) {
           await dispatch(
@@ -141,7 +140,7 @@ export function HistoryTableRow({
             </span>
             {isRemote && (
               <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900/20 dark:text-blue-300">
-                Remote
+                远程
               </span>
             )}
           </div>
@@ -151,17 +150,6 @@ export function HistoryTableRow({
           <span className="line-clamp-1 break-all text-xs">
             {getUriPathBasename(sessionMetadata.workspaceDirectory || "")}
           </span>
-          {/* Uncomment to show the date */}
-          {/* <span className="inline-block ml-auto">
-                {date.toLocaleString("en-US", {
-                  year: "2-digit",
-                  month: "2-digit",
-                  day: "2-digit",
-                  hour: "numeric",
-                  minute: "2-digit",
-                  hour12: true,
-                })}
-              </span> */}
         </div>
       </td>
 
@@ -169,7 +157,7 @@ export function HistoryTableRow({
         <td className="bg-input absolute right-2 top-1/2 ml-auto flex -translate-y-1/2 transform items-center gap-x-1 rounded-full px-2 py-1 shadow-md">
           {isRemote ? (
             <HeaderButtonWithToolTip
-              text="Open in browser"
+              text="在浏览器中打开"
               onClick={async (e) => {
                 e.stopPropagation();
                 await ideMessenger.request("controlPlane/openUrl", {
@@ -182,7 +170,7 @@ export function HistoryTableRow({
           ) : (
             <>
               <HeaderButtonWithToolTip
-                text="Edit"
+                text="编辑"
                 onClick={async (e) => {
                   e.stopPropagation();
                   setEditing(true);
@@ -192,7 +180,7 @@ export function HistoryTableRow({
               </HeaderButtonWithToolTip>
               {shareSessionSupported && (
                 <HeaderButtonWithToolTip
-                  text="Save Chat as Markdown"
+                  text="将聊天保存为 Markdown"
                   onClick={async (e) => {
                     e.stopPropagation();
                     await shareSession(sessionMetadata.sessionId);
@@ -202,7 +190,7 @@ export function HistoryTableRow({
                 </HeaderButtonWithToolTip>
               )}
               <HeaderButtonWithToolTip
-                text="Delete"
+                text="删除"
                 onClick={async (e) => {
                   e.stopPropagation();
                   await dispatch(deleteSession(sessionMetadata.sessionId));

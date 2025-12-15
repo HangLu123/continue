@@ -38,7 +38,7 @@ const HighlightOverlay = (props: HighlightOverlayProps) => {
         left,
         width,
         height,
-        pointerEvents: "none", // To click through the overlay
+        pointerEvents: "none",
         zIndex: 10,
       }}
     />
@@ -47,32 +47,21 @@ const HighlightOverlay = (props: HighlightOverlayProps) => {
 
 type ScrollToMatchOption = "closest" | "first" | "none";
 
-/*
-    useFindWidget takes a container ref and returns
-    1. A widget that can be placed anywhere to search the contents of that container
-    2. Search results and state
-    3. Highlight components to be overlayed over the container
-
-    Container must have relative positioning
-*/
 export const useFindWidget = (
   searchRef: RefObject<HTMLDivElement>,
   headerRef: RefObject<HTMLDivElement>,
   disabled: boolean,
 ) => {
-  // Search input, debounced
   const inputRef = useRef<HTMLInputElement>(null);
   const [currentValue, setCurrentValue] = useState<string>("");
   const searchTerm = useDebounceValue(currentValue, 300);
 
-  // Widget open/closed state
   const [open, setOpen] = useState<boolean>(false);
   const openWidget = useCallback(() => {
     setOpen(true);
     inputRef?.current?.select();
   }, [inputRef]);
 
-  // Search settings and results
   const [caseSensitive, setCaseSensitive] = useState<boolean>(false);
   const [useRegex, setUseRegex] = useState<boolean>(false);
 
@@ -81,8 +70,6 @@ export const useFindWidget = (
     undefined,
   );
 
-  // Navigating between search results
-  // The "current" search result is highlighted a different color
   const scrollToMatch = useCallback(
     (match: SearchMatch) => {
       setCurrentMatch(match);
@@ -110,7 +97,6 @@ export const useFindWidget = (
     scrollToMatch(newMatch);
   }, [scrollToMatch, currentMatch, matches]);
 
-  // Handle keyboard shortcuts for navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.metaKey && event.key.toLowerCase() === "f" && !event.shiftKey) {
@@ -137,7 +123,6 @@ export const useFindWidget = (
     };
   }, [inputRef, matches, nextMatch]);
 
-  // Handle container resize changes - highlight positions must adjust
   const { clientHeight: headerHeight, isResizing: headerResizing } =
     useElementSize(headerRef);
   const { isResizing: containerResizing } = useElementSize(searchRef);
@@ -145,7 +130,6 @@ export const useFindWidget = (
     return containerResizing || headerResizing;
   }, [containerResizing, headerResizing]);
 
-  // Main function for finding matches and generating highlight overlays
   const refreshSearch = useCallback(
     (scrollTo: ScrollToMatchOption = "none") => {
       const { results, closestToMiddle } = searchWithinContainer(
@@ -158,7 +142,7 @@ export const useFindWidget = (
         },
       );
       setMatches(results);
-      // Find match closest to the middle of the view
+
       if (searchTerm.length > 1 && results.length) {
         if (scrollTo === "first") {
           scrollToMatch(results[0]);
@@ -187,7 +171,6 @@ export const useFindWidget = (
     ],
   );
 
-  // Triggers that should cause immediate refresh of results to closest search value:
   useEffect(() => {
     if (disabled || isResizing || !open) {
       setMatches([]);
@@ -196,8 +179,6 @@ export const useFindWidget = (
     }
   }, [refreshSearch, open, disabled, isResizing]);
 
-  // Clicks in search div can cause content changes that for some reason don't trigger resize
-  // Refresh clicking within container
   useEffect(() => {
     const searchContainer = searchRef.current;
     if (!open || !searchContainer) return;
@@ -212,7 +193,6 @@ export const useFindWidget = (
     };
   }, [searchRef, refreshSearch, open]);
 
-  // Find widget component
   const widget = (
     <div
       className={`fixed top-0 z-50 transition-all ${open ? "" : "-translate-y-full"} bg-vsc-background right-0 flex flex-row items-center gap-1.5 rounded-bl-lg border-0 border-b border-l border-solid border-zinc-700 pl-[3px] pr-3 sm:gap-2`}
@@ -225,17 +205,17 @@ export const useFindWidget = (
         onChange={(e) => {
           setCurrentValue(e.target.value);
         }}
-        placeholder="Search..."
+        placeholder="搜索..."
       />
       <p className="xs:block hidden min-w-12 whitespace-nowrap px-1 text-center text-xs">
         {matches.length === 0
-          ? "No results"
-          : `${(currentMatch?.index ?? 0) + 1} of ${matches.length}`}
+          ? "无结果"
+          : `${(currentMatch?.index ?? 0) + 1} / ${matches.length}`}
       </p>
       <div className="hidden flex-row gap-0.5 sm:flex">
         <HeaderButtonWithToolTip
           tooltipPlacement="top-end"
-          text={"Previous Match"}
+          text={"上一个匹配项"}
           onClick={(e) => {
             e.stopPropagation();
             previousMatch();
@@ -247,7 +227,7 @@ export const useFindWidget = (
         </HeaderButtonWithToolTip>
         <HeaderButtonWithToolTip
           tooltipPlacement="top-end"
-          text={"Next Match"}
+          text={"下一个匹配项"}
           onClick={(e) => {
             e.stopPropagation();
             nextMatch();
@@ -262,11 +242,7 @@ export const useFindWidget = (
         disabled={disabled}
         inverted={caseSensitive}
         tooltipPlacement="top-end"
-        text={
-          caseSensitive
-            ? "Turn off case sensitivity"
-            : "Turn on case sensitivity"
-        }
+        text={caseSensitive ? "关闭大小写敏感" : "开启大小写敏感"}
         onClick={(e) => {
           e.stopPropagation();
           setCaseSensitive((curr) => !curr);
@@ -275,7 +251,7 @@ export const useFindWidget = (
       >
         Aa
       </HeaderButtonWithToolTip>
-      {/* TODO - add useRegex functionality */}
+
       <HeaderButton
         inverted={false}
         onClick={() => setOpen(false)}
@@ -286,7 +262,6 @@ export const useFindWidget = (
     </div>
   );
 
-  // Generate the highlight overlay elements
   const highlights = useMemo(() => {
     return matches.map((match) => (
       <HighlightOverlay

@@ -44,8 +44,7 @@ export interface StepContainerPreToolbarProps {
   collapsible?: boolean;
 }
 
-export const DANGEROUS_COMMAND_WARNING_MESSAGE =
-  "Potentially dangerous command";
+export const DANGEROUS_COMMAND_WARNING_MESSAGE = "潜在危险命令";
 
 export function StepContainerPreToolbar({
   showToolCallStatusIcon,
@@ -225,10 +224,7 @@ export function StepContainerPreToolbar({
   async function onClickApply() {
     const fileUri = await getFileUriToApplyTo();
     if (!fileUri) {
-      void ideMessenger.ide.showToast(
-        "error",
-        "Could not resolve filepath to apply changes",
-      );
+      void ideMessenger.ide.showToast("error", "无法解析要应用更改的文件路径");
       return;
     }
 
@@ -252,7 +248,7 @@ export function StepContainerPreToolbar({
     if (!filepath) {
       void ideMessenger.ide.showToast(
         "error",
-        `Could not resolve filepath to ${action} changes`,
+        `无法解析要${action === "accept" ? "接受" : "拒绝"}更改的文件路径`,
       );
       return;
     }
@@ -301,7 +297,7 @@ export function StepContainerPreToolbar({
       } else {
         return (
           <span className="text-lightgray inline-flex items-center gap-2 text-right">
-            {`${numLines} line${plural} pending`}
+            {`${numLines} 行待处理`}
           </span>
         );
       }

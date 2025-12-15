@@ -94,12 +94,12 @@ function ModelOption({
             {option.title}
             {option.isAutoDetected && (
               <span className="text-description-muted ml-1.5 text-[10px] italic">
-                (autodetected)
+                （自动检测）
               </span>
             )}
             {showMissingApiKeyMsg && (
               <span className="ml-1.5 text-[10px] italic">
-                (Missing API key)
+                （缺少 API Key）
               </span>
             )}
           </span>
@@ -252,7 +252,7 @@ function ModelSelect() {
           className="text-description h-[18px] gap-1 border-none"
         >
           <span className="line-clamp-1 break-all hover:brightness-110">
-            {modelSelectTitle(selectedModel) || "Select model"}
+            {modelSelectTitle(selectedModel) || "选择模型"}
           </span>
           <ChevronDownIcon
             className="hidden h-2 w-2 flex-shrink-0 hover:brightness-110 min-[200px]:flex"
@@ -261,7 +261,7 @@ function ModelSelect() {
         </ListboxButton>
         <ListboxOptions className="min-w-[160px]">
           <div className="flex items-center justify-between px-1.5 py-1">
-            <span className="text-description text-xs font-medium">Models</span>
+            <span className="text-description text-xs font-medium">模型</span>
             <div className="flex items-center gap-0.5">
               <Button
                 onClick={(e) => {
@@ -281,11 +281,11 @@ function ModelSelect() {
             {isConfigLoading ? (
               <div className="text-description flex items-center gap-2 px-2 pb-2 pt-1 text-xs">
                 <ArrowPathIcon className="animate-spin-slow h-3 w-3" />
-                <span>Loading config</span>
+                <span>正在加载配置...</span>
               </div>
             ) : hasNoModels ? (
               <div className="text-description-muted px-2 py-4 text-center text-sm">
-                No models configured
+                尚未配置任何模型
               </div>
             ) : (
               sortedOptions.map((option, idx) => (
@@ -314,7 +314,7 @@ function ModelSelect() {
                   >
                     <span className="text-description text-2xs flex flex-row items-center">
                       <PlusIcon className="mr-1.5 h-3.5 w-3.5" />
-                      Add Chat model
+                      导入模型配置文件
                     </span>
                   </ListboxOption>
                 </>
@@ -323,7 +323,7 @@ function ModelSelect() {
               <Divider className="!my-0" />
               <div className="text-description flex items-center justify-start p-2">
                 <span className="block" style={{ fontSize: tinyFont }}>
-                  <code>{getMetaKeyLabel()}'</code> to toggle model
+                  <code>{getMetaKeyLabel()}'</code> 切换模型
                 </span>
               </div>
             </>

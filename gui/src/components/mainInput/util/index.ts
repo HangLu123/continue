@@ -10,8 +10,8 @@ export function getEditFilenameAndRangeText(code: SetCodeToEditPayload) {
     const end = code.range.end.line + 1;
     const isInsertion = start === end;
     title += isInsertion
-      ? ` - Inserting at line ${start}`
-      : ` (${start} - ${end})`;
+      ? ` - 插入到第 ${start} 行`
+      : `(第 ${start} 行 - 第 ${end} 行)`;
   }
 
   return title;

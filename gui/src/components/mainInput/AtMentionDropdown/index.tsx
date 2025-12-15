@@ -245,19 +245,13 @@ const AtMentionDropdown = forwardRef((props: AtMentionDropdownProps, ref) => {
         .run();
 
       // Trigger warning message
-      void ideMessenger.ide.showToast(
-        "warning",
-        fileSize > 0
-          ? "File exceeds model's context length"
-          : "Error loading file",
-        {
-          modal: true,
-          detail:
-            fileSize > 0
-              ? `'${item.title}' cannot be added because it exceeds the model's allowed context length. File size: ${formatFileSize(fileSize)}`
-              : `'${item.title}' could not be loaded. Please check if the file exists and has the correct permissions.`,
-        },
-      );
+      void ideMessenger.ide.showToast("warning", "文件超出模型的上下文限制", {
+        modal: true,
+        detail:
+          fileSize > 0
+            ? `'${item.title}' 无法被添加，因为它超出了模型允许的上下文长度。文件大小：${formatFileSize(fileSize)}`
+            : `'${item.title}' 无法被加载。请检查文件是否存在且权限正确。`,
+      });
     } else {
       props.command({ ...item, itemType: item.type });
     }
@@ -267,13 +261,12 @@ const AtMentionDropdown = forwardRef((props: AtMentionDropdownProps, ref) => {
     const items = [...props.items];
     if (subMenuTitle === "Type to search docs") {
       items.push({
-        title: "Add Docs",
+        title: "添加文档",
         type: "action",
         action: () => {
           dispatch(setShowDialog(true));
           dispatch(setDialogMessage(<AddDocsDialog />));
 
-          // Delete back to last '@'
           const { tr } = props.editor.view.state;
           const text = tr.doc.textBetween(0, tr.selection.from);
           const start = text.lastIndexOf("@");
@@ -285,7 +278,7 @@ const AtMentionDropdown = forwardRef((props: AtMentionDropdownProps, ref) => {
       });
     } else if (subMenuTitle === ".prompt files") {
       items.push({
-        title: "New .prompt file",
+        title: "新建 .prompt 文件",
         type: "action",
         action: () => {
           ideMessenger.post("config/newPromptFile", undefined);
@@ -297,13 +290,13 @@ const AtMentionDropdown = forwardRef((props: AtMentionDropdownProps, ref) => {
               tr.delete(start, tr.selection.from).scrollIntoView(),
             );
           }
-          props.onClose(); // Escape the mention list after creating a new prompt file
+          props.onClose();
         },
-        description: "Create a new .prompt file",
+        description: "创建一个新的 .prompt 文件",
       });
     } else if (subMenuTitle === "Mention rules files") {
       items.push({
-        title: "Add new rule",
+        title: "添加新规则",
         type: "action",
         action: () => {
           void ideMessenger.request("config/addLocalWorkspaceBlock", {
@@ -317,9 +310,9 @@ const AtMentionDropdown = forwardRef((props: AtMentionDropdownProps, ref) => {
               tr.delete(start, tr.selection.from).scrollIntoView(),
             );
           }
-          props.onClose(); // Escape the mention list after creating a new rule
+          props.onClose();
         },
-        description: "Creates a rule file",
+        description: "创建一个规则文件",
       });
     }
     setLoadingSubmenuItem(items.find((item) => item.id === "loading"));
@@ -354,7 +347,6 @@ const AtMentionDropdown = forwardRef((props: AtMentionDropdownProps, ref) => {
     }
 
     if (item.contextProvider?.type === "query") {
-      // update editor to complete context provider title
       const { tr } = props.editor.view.state;
       const text = tr.doc.textBetween(0, tr.selection.from);
       const partialText = text.slice(text.lastIndexOf("@") + 1);
@@ -612,11 +604,12 @@ const AtMentionDropdown = forwardRef((props: AtMentionDropdownProps, ref) => {
               );
             })
           ) : (
-            <ItemDiv className="item whitespace-nowrap">No results</ItemDiv>
+            <ItemDiv className="item whitespace-nowrap">无结果</ItemDiv>
           )}
         </>
       )}
     </ItemsDiv>
   );
 });
+
 export default AtMentionDropdown;

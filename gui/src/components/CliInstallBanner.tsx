@@ -111,26 +111,14 @@ export function CliInstallBanner({
           <div>
             <div className="text-foreground flex items-center gap-2 font-medium">
               <CommandLineIcon className="h-5 w-5 flex-shrink-0 text-gray-400" />
-              Try out the Continue CLI
+              尝试使用 Continue CLI
             </div>
             <div className="text-description mt-1 text-sm">
-              Use{" "}
+              在终端中交互使用{" "}
               <code className="bg-vsc-background rounded px-1.5 py-0.5">
                 cn
               </code>{" "}
-              in your terminal interactively and then deploy Continuous AI
-              workflows.{" "}
-              <span
-                onClick={() =>
-                  ideMessenger.post(
-                    "openUrl",
-                    "https://docs.continue.dev/guides/cli",
-                  )
-                }
-                className="cursor-pointer underline hover:brightness-125"
-              >
-                Learn more.
-              </span>
+              ，然后部署持续的 AI 工作流。{" "}
             </div>
           </div>
           <div className="flex flex-col items-start gap-2 self-stretch">

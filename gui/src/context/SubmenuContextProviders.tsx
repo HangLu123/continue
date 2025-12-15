@@ -420,8 +420,8 @@ export const SubmenuContextProvidersProvider = ({
             const loadingFiller = [
               {
                 id: "loading",
-                title: "Loading...",
-                description: "Please wait while items are being loaded",
+                title: "加载中...",
+                description: "请稍候，项目正在加载中",
                 providerTitle: providerTitle || "unknown",
               },
             ];

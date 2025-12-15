@@ -34,7 +34,7 @@ export const DragOverlay: React.FC<DragOverlayProps> = ({ show, setShow }) => {
   return (
     <>
       <HoverDiv />
-      <HoverTextDiv>Hold ⇧ to drop image</HoverTextDiv>
+      <HoverTextDiv>按住 ⇧ 键可直接插入图片。</HoverTextDiv>
     </>
   );
 };

@@ -71,30 +71,30 @@ export function History() {
     | BaseSessionMetadata
     | RemoteSessionMetadata
   )[] = useMemo(() => {
-    // 1. Exact phrase matching
+    // 1. 精确匹配
     const exactResults = minisearch.search(searchTerm, {
       fuzzy: false,
     });
 
-    // 2. Fuzzy matching with higher tolerance
+    // 2. 模糊匹配
     const fuzzyResults = minisearch.search(searchTerm, {
       fuzzy: 0.3,
     });
 
-    // 3. Prefix matching for partial words
+    // 3. 前缀匹配
     const prefixResults = minisearch.search(searchTerm, {
       prefix: true,
       fuzzy: 0.2,
     });
 
-    // Combine results, with exact matches having higher priority
+    // 合并结果，精确匹配优先
     const allResults = [
       ...exactResults.map((r) => ({ ...r, priority: 3 })),
       ...fuzzyResults.map((r) => ({ ...r, priority: 2 })),
       ...prefixResults.map((r) => ({ ...r, priority: 1 })),
     ];
 
-    // Remove duplicates while preserving highest priority
+    // 去重并保留最高优先级
     const uniqueResultsMap = new Map<string, any>();
     allResults.forEach((result) => {
       const existing = uniqueResultsMap.get(result.id);
@@ -127,17 +127,17 @@ export function History() {
     dispatch(
       setDialogMessage(
         <ConfirmationDialog
-          title={`Clear sessions`}
-          text={`Are you sure you want to permanently delete all chat sessions, including the current chat session?`}
+          title={`清空会话`}
+          text={`确定要永久删除所有聊天会话（包括当前会话）吗？`}
           onConfirm={async () => {
-            // optimistic update
+            // 乐观 UI 更新
             dispatch(setAllSessionMetadata([]));
 
-            // actual update + refresh
+            // 实际清除 + 刷新
             await ideMessenger.request("history/clear", undefined);
             void dispatch(refreshSessionMetadata({}));
 
-            // start a new session
+            // 启动新会话
             dispatch(newSession());
             navigate(ROUTES.HOME);
           }}
@@ -156,7 +156,7 @@ export function History() {
         <input
           className="bg-vsc-input-background text-vsc-foreground flex-1 rounded-md border border-none py-1 pl-2 pr-8 text-sm outline-none focus:outline-none"
           ref={searchInputRef}
-          placeholder="Search past sessions"
+          placeholder="搜索历史会话"
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -178,12 +178,12 @@ export function History() {
         {filteredAndSortedSessions.length === 0 && (
           <div className="m-3 text-center">
             {isSessionMetadataLoading ? (
-              "Loading Sessions..."
+              "正在加载会话..."
             ) : (
               <>
-                No past sessions found. To start a new session, either click the
-                "+" button or use the keyboard shortcut:{" "}
+                未找到任何历史会话。您可以点击 “+” 按钮 或使用快捷键：
                 <Shortcut>meta L</Shortcut>
+                开始一个新的会话。
               </>
             )}
           </div>
@@ -215,13 +215,13 @@ export function History() {
 
       <div className="border-border flex flex-col items-end justify-center border-0 border-t border-solid px-2 py-3 text-xs">
         <Button variant="secondary" size="sm" onClick={showClearSessionsDialog}>
-          Clear chats
+          清空聊天记录
         </Button>
         <span
           className="text-description text-2xs"
           data-testid="history-sessions-note"
         >
-          Chat history is saved to{" "}
+          聊天记录保存于{" "}
           <span className="italic">
             {platform === "windows"
               ? "%USERPROFILE%/.continue"

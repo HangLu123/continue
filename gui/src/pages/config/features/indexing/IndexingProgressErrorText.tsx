@@ -31,8 +31,7 @@ function IndexingProgressErrorText({ update }: IndexingProgressErrorTextProps) {
       <div className="flex items-center gap-2 italic">
         <XCircleIcon className="h-4 w-4 min-w-[10%]" />
         <span className="leading-relaxed">
-          Add an Embeddings model to enable codebase indexing. See the docs for
-          examples:
+          请先添加一个 Embeddings 模型以启用代码库索引。示例请参考文档：
           <a
             href="https://docs.continue.dev/walkthroughs/codebase-embeddings#embeddings-providers"
             target="_blank"
@@ -45,7 +44,7 @@ function IndexingProgressErrorText({ update }: IndexingProgressErrorTextProps) {
     );
   }
 
-  // Show warnings if they exist (for completed indexing with warnings)
+  // 索引完成但存在警告时显示
   if (
     update.warnings &&
     update.warnings.length > 0 &&
@@ -58,8 +57,7 @@ function IndexingProgressErrorText({ update }: IndexingProgressErrorTextProps) {
           onClick={() => setShowWarnings(!showWarnings)}
         >
           <span className="leading-relaxed">
-            {update.warnings.length} warning
-            {update.warnings.length > 1 ? "s" : ""} during indexing
+            索引过程中产生了 {update.warnings.length} 条警告
           </span>
           <ChevronRightIcon
             className={`h-3 w-3 transition-transform duration-300 ${
@@ -73,7 +71,7 @@ function IndexingProgressErrorText({ update }: IndexingProgressErrorTextProps) {
             showWarnings ? "mt-2 max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          {/* Warning messages */}
+          {/* 警告信息列表 */}
           <div className="space-y-1">
             {update.warnings.map((warning, index) => (
               <div key={index} className="text-xs">
@@ -82,18 +80,18 @@ function IndexingProgressErrorText({ update }: IndexingProgressErrorTextProps) {
             ))}
           </div>
 
-          {/* Action Buttons */}
+          {/* 操作按钮 */}
           <div className="flex flex-row items-center justify-end gap-2 pt-4">
-            {/* Copy all warnings to clipboard */}
+            {/* 复制全部警告 */}
             <GhostButton
               onClick={() => copyWarningsToClipboard(update.warnings)}
               className="flex items-center !px-1.5 !py-0.5 text-xs"
             >
               <ClipboardIcon className="mr-1 h-3 w-3" />
-              <span>Copy output</span>
+              <span>复制输出</span>
             </GhostButton>
 
-            {/* Open dev tools to view logs */}
+            {/* 打开开发者工具查看日志 */}
             <GhostButton
               onClick={() => {
                 ideMessenger.post("toggleDevTools", undefined);
@@ -101,7 +99,7 @@ function IndexingProgressErrorText({ update }: IndexingProgressErrorTextProps) {
               className="flex items-center !px-1.5 !py-0.5 text-xs"
             >
               <ArrowTopRightOnSquareIcon className="mr-1 h-3 w-3" />
-              <span>View Logs</span>
+              <span>查看日志</span>
             </GhostButton>
           </div>
         </div>
@@ -109,7 +107,7 @@ function IndexingProgressErrorText({ update }: IndexingProgressErrorTextProps) {
     );
   }
 
-  // Show error for failed status
+  // 索引失败时显示错误
   return (
     <div className="flex items-center gap-2 italic text-red-600">
       <XCircleIcon className="h-4 w-4" />

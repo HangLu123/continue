@@ -13,7 +13,7 @@ function AddRuleDialog({ mode }: { mode: "workspace" | "global" }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useLayoutEffect(() => {
-    // focus on input after a short delay
+    // 短暂延迟后自动聚焦输入框
     const timer = setTimeout(() => {
       if (inputRef.current) {
         inputRef.current.focus();
@@ -31,7 +31,7 @@ function AddRuleDialog({ mode }: { mode: "workspace" | "global" }) {
     e.preventDefault();
     const trimmed = name.trim();
     if (!trimmed) {
-      setError("Rule name is required");
+      setError("规则名称不能为空");
       return;
     }
     setError(undefined);
@@ -50,26 +50,26 @@ function AddRuleDialog({ mode }: { mode: "workspace" | "global" }) {
       closeDialog();
     } catch (err) {
       setIsSubmitting(false);
-      setError("Failed to create rule file");
+      setError("创建规则文件失败");
     }
   };
 
-  const title = mode === "global" ? "Add global rule" : "Add workspace rule";
+  const title = mode === "global" ? "添加全局规则" : "添加工作区规则";
 
   return (
     <div className="px-2 pt-4 sm:px-4">
       <div>
         <h1 className="mb-0">{title}</h1>
         <p className="m-0 mt-2 p-0 text-stone-500">
-          Choose a name for the new rule file.
+          为新的规则文件输入一个名称。
         </p>
         <form onSubmit={handleSubmit} className="mt-3 flex flex-col gap-2">
           <label className="flex w-full flex-col gap-1">
-            <span>Rule name</span>
+            <span>规则名称</span>
             <Input
               ref={inputRef}
               type="text"
-              placeholder="ex: api-guidelines"
+              placeholder="例如：api-guidelines"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -81,14 +81,14 @@ function AddRuleDialog({ mode }: { mode: "workspace" | "global" }) {
               disabled={isSubmitting}
               type="submit"
             >
-              Create
+              创建
             </SecondaryButton>
             <SecondaryButton
               type="button"
               className="min-w-16"
               onClick={closeDialog}
             >
-              Cancel
+              取消
             </SecondaryButton>
           </div>
         </form>

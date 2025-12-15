@@ -68,10 +68,10 @@ export function ToolPoliciesGroup({
         <ToolTip
           content={
             allToolsOff
-              ? "Tools disabled in current mode"
+              ? "当前模式下工具已禁用"
               : isGroupEnabled
-                ? `Disable all tools in ${groupName} group`
-                : `Enable all tools in ${groupName} group`
+                ? `禁用 ${groupName} 组中的所有工具`
+                : `启用 ${groupName} 组中的所有工具`
           }
         >
           <div>

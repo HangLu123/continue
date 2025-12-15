@@ -20,7 +20,6 @@ const Tr = styled.tr`
   }
 
   overflow-wrap: anywhere;
-
   border: 1px solid ${lightGray};
 `;
 
@@ -65,14 +64,14 @@ function Stats() {
         backgroundColor: vscBackground,
       }}
     >
-      <PageHeader title="More" onTitleClick={() => navigate(-1)} showBorder />
+      <PageHeader title="更多" onTitleClick={() => navigate(-1)} showBorder />
 
       <div className="p-2">
         <div className="flex items-center gap-2">
-          <h2 className="ml-2">Tokens per Day</h2>
+          <h2 className="ml-2">每日 Token 使用量</h2>
           <CopyIconButton
             text={generateTable(
-              ([["Day", "Generated Tokens", "Prompt Tokens"]] as any).concat(
+              ([["日期", "生成 Tokens", "提示 Tokens"]] as any).concat(
                 days.map((day) => [
                   day.day,
                   day.generatedTokens,
@@ -82,17 +81,18 @@ function Stats() {
             )}
           />
         </div>
+
         <table className="w-full border-collapse">
           <thead>
             <Tr>
-              <Th>Day</Th>
-              <Th>Generated Tokens</Th>
-              <Th>Prompt Tokens</Th>
+              <Th>日期</Th>
+              <Th>生成 Tokens</Th>
+              <Th>提示 Tokens</Th>
             </Tr>
           </thead>
           <tbody>
             {days.map((day) => (
-              <Tr key={day.day} className="">
+              <Tr key={day.day}>
                 <Td>{day.day}</Td>
                 <Td>{day.generatedTokens.toLocaleString()}</Td>
                 <Td>{day.promptTokens.toLocaleString()}</Td>
@@ -102,10 +102,10 @@ function Stats() {
         </table>
 
         <div className="flex items-center gap-2">
-          <h2 className="ml-2">Tokens per Model</h2>
+          <h2 className="ml-2">按模型统计 Token 使用量</h2>
           <CopyIconButton
             text={generateTable(
-              ([["Model", "Generated Tokens", "Prompt Tokens"]] as any).concat(
+              ([["模型", "生成 Tokens", "提示 Tokens"]] as any).concat(
                 models.map((model) => [
                   model.model,
                   model.generatedTokens.toLocaleString(),
@@ -115,17 +115,18 @@ function Stats() {
             )}
           />
         </div>
+
         <table className="w-full border-collapse">
           <thead>
             <Tr>
-              <Th>Model</Th>
-              <Th>Generated Tokens</Th>
-              <Th>Prompt Tokens</Th>
+              <Th>模型</Th>
+              <Th>生成 Tokens</Th>
+              <Th>提示 Tokens</Th>
             </Tr>
           </thead>
           <tbody>
             {models.map((model) => (
-              <Tr key={model.model} className="">
+              <Tr key={model.model}>
                 <Td>{model.model}</Td>
                 <Td>{model.generatedTokens.toLocaleString()}</Td>
                 <Td>{model.promptTokens.toLocaleString()}</Td>

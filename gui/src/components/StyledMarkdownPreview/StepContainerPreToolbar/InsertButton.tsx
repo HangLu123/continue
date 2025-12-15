@@ -15,7 +15,7 @@ export function InsertButton({ onInsert }: InsertButtonProps) {
       data-tooltip-id="codeblock-insert-button-tooltip"
       className="!p-0"
     >
-      <ToolTip place="top" content="Insert Code">
+      <ToolTip place="top" content="插入代码">
         <div
           className="text-lightgray flex cursor-pointer items-center border-none bg-transparent text-xs outline-none hover:brightness-125"
           onClick={onInsert}

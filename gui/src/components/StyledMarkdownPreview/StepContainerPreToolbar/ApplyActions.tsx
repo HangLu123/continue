@@ -24,7 +24,7 @@ export function ApplyActions(props: ApplyActionsProps) {
       return (
         <div className="bg-badge flex select-none items-center rounded pl-2 pr-1">
           <span className="text-lightgray inline-flex items-center gap-2 text-center text-xs">
-            Applying
+            正在应用
             <Spinner />
           </span>
         </div>
@@ -40,7 +40,7 @@ export function ApplyActions(props: ApplyActionsProps) {
             <ToolbarButtonWithTooltip
               data-testid="codeblock-toolbar-reject"
               onClick={onClickReject}
-              tooltipContent={`Reject all (${getMetaKeyLabel()}⇧⌫)`}
+              tooltipContent={`拒绝所有 (${getMetaKeyLabel()}⇧⌫)`}
             >
               <XMarkIcon className="text-error h-3.5 w-3.5 flex-shrink-0 hover:brightness-125" />
             </ToolbarButtonWithTooltip>
@@ -48,7 +48,7 @@ export function ApplyActions(props: ApplyActionsProps) {
             <ToolbarButtonWithTooltip
               data-testid="codeblock-toolbar-accept"
               onClick={props.onClickAccept}
-              tooltipContent={`Accept all (${getMetaKeyLabel()}⇧⏎)`}
+              tooltipContent={`接受所有 (${getMetaKeyLabel()}⇧⏎)`}
             >
               <CheckIcon className="text-success h-3.5 w-3.5 flex-shrink-0 hover:brightness-125" />
             </ToolbarButtonWithTooltip>
@@ -62,7 +62,7 @@ export function ApplyActions(props: ApplyActionsProps) {
       }
 
       return (
-        <ToolTip place="top" content="Apply Code">
+        <ToolTip place="top" content="应用代码">
           <HoverItem
             data-tooltip-id="codeblock-apply-code-button-tooltip"
             className="!p-0"
@@ -74,7 +74,7 @@ export function ApplyActions(props: ApplyActionsProps) {
             >
               <div className="text-lightgray flex items-center gap-1">
                 <PlayIcon className="h-3.5 w-3.5" />
-                <span className="xs:inline hidden">Apply</span>
+                <span className="xs:inline hidden">应用</span>
               </div>
             </button>
           </HoverItem>

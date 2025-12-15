@@ -1,14 +1,9 @@
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import yaml from "js-yaml";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Button, Input, StyledActionButton } from "../components";
-import Alert from "../components/gui/Alert";
-import ModelSelectionListbox from "../components/modelSelection/ModelSelectionListbox";
+import { Button } from "../components";
 import { useAuth } from "../context/Auth";
 import { IdeMessengerContext } from "../context/IdeMessenger";
-import { completionParamsInputs } from "../pages/AddNewModel/configs/completionParamsInputs";
-import { DisplayInfo } from "../pages/AddNewModel/configs/models";
 import {
   ProviderInfo,
   providers,
@@ -116,7 +111,7 @@ export function AddModelForm({
       reader.onload = (e) => {
         try {
           const text = e.target?.result as string;
-          const parsed = yaml.load(text);
+          const parsed: any = yaml.load(text);
 
           if (
             !parsed ||
@@ -149,16 +144,16 @@ export function AddModelForm({
    ------------------------------ */
   async function onSubmit() {
     /** ====== 如果 YAML 存在，优先使用 YAML ====== */
-    if (yamlConfig) {
-      ideMessenger.post("config/deleteModel", { title: "deleteAll" });
+    // if (yamlConfig) {
+    //   ideMessenger.post("config/deleteModel", { title: "deleteAll" });
 
-      yamlConfig.models.forEach((model: any) => {
-        ideMessenger.post("config/addModel", { model });
-      });
+    //   yamlConfig.models.forEach((model: any) => {
+    //     ideMessenger.post("config/addModel", { model });
+    //   });
 
-      onDone();
-      return;
-    }
+    //   onDone();
+    //   return;
+    // }
 
     /** ====== 以下为原表单逻辑 ====== */
     const apiKey = formMethods.watch("apiKey");
@@ -179,7 +174,7 @@ export function AddModelForm({
     };
 
     ideMessenger.post("config/deleteModel", { title: "deleteAll" });
-    ideMessenger.post("config/addModel", { model });
+    ideMessenger.post("config/addModel", { model: yamlConfig.models });
 
     ideMessenger.post("config/openProfile", {
       profileId: "local",
@@ -192,7 +187,6 @@ export function AddModelForm({
         modelTitle: model.title,
       }),
     );
-
     onDone();
   }
 
@@ -211,22 +205,26 @@ export function AddModelForm({
     <FormProvider {...formMethods}>
       <form onSubmit={formMethods.handleSubmit(onSubmit)}>
         <div className="mx-auto max-w-md p-6">
-          <h1 className="mb-0 text-center text-2xl">Add Chat Model</h1>
+          <h1 className="mb-0 text-center text-2xl">
+            导入模型配置文件(yaml格式)
+          </h1>
 
           <div className="my-8 flex flex-col gap-6">
             {/* =============================
                 YAML 上传区域（新增）
               ============================= */}
             <div>
-              <label className="block text-sm font-medium">
-                导入 YAML 配置文件
+              <label className="flex cursor-pointer flex-col items-center rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-sm transition hover:bg-zinc-700">
+                <span className="text-sm text-zinc-300">
+                  点击上传 YAML 配置文件
+                </span>
+                <input
+                  type="file"
+                  accept=".yaml,.yml"
+                  className="hidden"
+                  onChange={handleYamlUpload}
+                />
               </label>
-              <input
-                type="file"
-                accept=".yaml,.yml"
-                onChange={handleYamlUpload}
-                className="mt-2 w-full text-sm"
-              />
 
               {yamlError && (
                 <p className="mt-1 text-xs text-red-500">{yamlError}</p>
@@ -237,146 +235,63 @@ export function AddModelForm({
                   YAML 已加载，提交时将自动导入模型配置
                 </p>
               )}
-            </div>
+              {/* ========== 显示 YAML 解析出的模型 ========== */}
+              {yamlConfig && yamlConfig.models && (
+                <div className="mt-4">
+                  <h2 className="mb-2 text-sm font-semibold text-zinc-300">
+                    已加载模型（{yamlConfig.models.length}）
+                  </h2>
 
-            {/* ===== 如果 YAML 已上传，则隐藏原表单区域 ===== */}
-            {!yamlConfig && (
-              <>
-                {/* Provider 选择 */}
-                <div>
-                  <label className="block text-sm font-medium">Provider</label>
-                  <ModelSelectionListbox
-                    selectedProvider={selectedProvider}
-                    setSelectedProvider={(val: DisplayInfo) => {
-                      const match = [
-                        ...popularProviders,
-                        ...otherProviders,
-                      ].find((provider) => provider.title === val.title);
-                      match && setSelectedProvider(match);
-                    }}
-                    topOptions={popularProviders}
-                    otherOptions={otherProviders}
-                  />
+                  <div className="flex flex-col gap-3">
+                    {yamlConfig.models.map((m: any, idx: number) => (
+                      <div
+                        key={idx}
+                        className="rounded-lg border border-zinc-700 bg-zinc-800/60 p-4 transition hover:bg-zinc-800"
+                      >
+                        <p className="text-base font-semibold text-white">
+                          {m.name}
+                        </p>
 
-                  <span className="text-description-muted mt-1 block text-xs">
-                    Don't see your provider?{" "}
-                    <a
-                      className="cursor-pointer underline"
-                      onClick={() =>
-                        ideMessenger.post("openUrl", MODEL_PROVIDERS_URL)
-                      }
-                    >
-                      Click here
-                    </a>{" "}
-                    to view the full list
-                  </span>
-                </div>
-
-                {/* Download provider */}
-                {selectedProvider.downloadUrl && (
-                  <div>
-                    <label className="mb-1 block text-sm font-medium">
-                      Install provider
-                    </label>
-                    <StyledActionButton onClick={onClickDownloadProvider}>
-                      <p className="text-sm underline">
-                        {selectedProvider.downloadUrl}
-                      </p>
-                      <ArrowTopRightOnSquareIcon width={24} height={24} />
-                    </StyledActionButton>
-                  </div>
-                )}
-
-                {/* Model 选择 */}
-                <div>
-                  <label className="block text-sm font-medium">Model</label>
-                  <ModelSelectionListbox
-                    selectedProvider={selectedModel}
-                    setSelectedProvider={(val: DisplayInfo) => {
-                      const options =
-                        Object.entries(providers).find(
-                          ([, provider]) =>
-                            provider?.title === selectedProvider.title,
-                        )?.[1]?.packages ?? [];
-
-                      const match = options.find(
-                        (option) => option.title === val.title,
-                      );
-                      match && setSelectedModel(match);
-                    }}
-                    topOptions={
-                      Object.entries(providers).find(
-                        ([, provider]) =>
-                          provider?.title === selectedProvider.title,
-                      )?.[1]?.packages
-                    }
-                  />
-                </div>
-
-                {/* Codestral 提示 */}
-                {selectedModel.params.model.startsWith("codestral") && (
-                  <Alert className="my-2">
-                    <p className="m-0 text-sm font-bold">Codestral API key</p>
-                    <p className="m-0 mt-1">
-                      Note that codestral requires a different API key from
-                      other Mistral models
-                    </p>
-                  </Alert>
-                )}
-
-                {/* API Key */}
-                {selectedProvider.apiKeyUrl && (
-                  <div>
-                    <label className="mb-1 block text-sm font-medium">
-                      API key
-                    </label>
-                    <Input
-                      id="apiKey"
-                      className="w-full"
-                      type="password"
-                      placeholder={`Enter your ${selectedProvider.title} API key`}
-                      {...formMethods.register("apiKey")}
-                    />
-                  </div>
-                )}
-
-                {/* 其他 Required 字段 */}
-                {selectedProvider.collectInputFor &&
-                  selectedProvider.collectInputFor
-                    .filter(
-                      (field) =>
-                        !Object.values(completionParamsInputs).some(
-                          (input) => input.key === field.key,
-                        ) &&
-                        field.required &&
-                        field.key !== "apiKey",
-                    )
-                    .map((field) => (
-                      <div key={field.key}>
-                        <label className="mb-1 block text-sm font-medium">
-                          {field.label}
-                        </label>
-                        <Input
-                          id={field.key}
-                          className="w-full"
-                          defaultValue={field.defaultValue}
-                          placeholder={`${field.placeholder}`}
-                          {...formMethods.register(field.key)}
-                        />
+                        <div className="mt-2 space-y-1 text-xs text-zinc-400">
+                          <p>
+                            <span className="text-zinc-500">provider: </span>
+                            {m.provider}
+                          </p>
+                          <p>
+                            <span className="text-zinc-500">model: </span>
+                            {m.model}
+                          </p>
+                          <p>
+                            <span className="text-zinc-500">apiBase: </span>
+                            {m.apiBase}
+                          </p>
+                          <p>
+                            <span className="text-zinc-500">roles: </span>
+                            {m.roles?.join(", ") || "无"}
+                          </p>
+                          <p>
+                            <span className="text-zinc-500">
+                              capabilities:{" "}
+                            </span>
+                            {m.capabilities?.join(", ") || "无"}
+                          </p>
+                        </div>
                       </div>
                     ))}
-              </>
-            )}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Submit */}
           <div className="mt-4 w-full">
             <Button type="submit" className="w-full" disabled={isDisabled()}>
-              Connect
+              确定接入
             </Button>
 
             <span className="text-description-muted block w-full text-center text-xs">
-              This will update your{" "}
+              这将更新你的{" "}
               <span
                 className="cursor-pointer underline hover:brightness-125"
                 onClick={() =>
@@ -385,7 +300,7 @@ export function AddModelForm({
                   })
                 }
               >
-                config file
+                配置文件（config file）
               </span>
             </span>
           </div>

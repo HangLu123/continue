@@ -30,7 +30,7 @@ const DEFAULT_MOCK_CORE_RESPONSES: MockResponses = {
   fileExists: true,
   getCurrentFile: {
     isUntitled: false,
-    contents: "Current file contents",
+    contents: "当前文件内容",
     path: "file:///Users/user/workspace1/current_file.py",
   },
   "controlPlane/getCreditStatus": {
@@ -94,9 +94,9 @@ const DEFAULT_MOCK_CORE_RESPONSES: MockResponses = {
   "tools/call": {
     contextItems: [
       {
-        content: "Tool call executed successfully",
+        content: "工具调用执行成功",
         name: "Tool Result",
-        description: "Mock tool result",
+        description: "模拟工具结果",
       },
     ],
   },

@@ -2,7 +2,6 @@ import { fetchwithRequestOptions } from "@continuedev/fetch";
 import * as URI from "uri-js";
 import { v4 as uuidv4 } from "uuid";
 
-import fetch from "node-fetch";
 import { CompletionProvider } from "./autocomplete/CompletionProvider";
 import {
   openedFilesLruCache,
@@ -380,55 +379,55 @@ export class Core {
     });
 
     on("config/addModel", async (msg) => {
-      const model:any = msg.data.model;
-      let model1 = [
-        {
-          model: "Qwen2.5-Coder-7B-Instruct",
-          title: "GPT-5 Codex",
-          apiBase:
-            "http://192.168.0.22/dockerService/vllm-pzhlei-dbe84b16-d054-4153-843f-1f3a47c38d4a/v1",
-          provider: "openai",
-          roles: "chat",
-        },
-        {
-          model: "Qwen2.5-72B-Instruct-AWQ",
-          title: "GPT-5 Codex",
-          apiBase:
-            "http://192.168.0.22/dockerService/vllm-pzhlei-e8fac41f-c596-4a9d-9798-910712404819/v1",
-          provider: "openai",
-          roles: "chat",
-        },
-      ];
-      try {
-        const res: any = await fetch(
-          "https://192.168.93.11/jhai/dockerServiceMetrics/targets",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          },
-        );
+      const model: any = msg.data.model;
+      // let model1 = [
+      //   {
+      //     model: "Qwen2.5-Coder-7B-Instruct",
+      //     title: "GPT-5 Codex",
+      //     apiBase:
+      //       "http://192.168.0.22/dockerService/vllm-pzhlei-dbe84b16-d054-4153-843f-1f3a47c38d4a/v1",
+      //     provider: "openai",
+      //     roles: "chat",
+      //   },
+      //   {
+      //     model: "Qwen2.5-72B-Instruct-AWQ",
+      //     title: "GPT-5 Codex",
+      //     apiBase:
+      //       "http://192.168.0.22/dockerService/vllm-pzhlei-e8fac41f-c596-4a9d-9798-910712404819/v1",
+      //     provider: "openai",
+      //     roles: "chat",
+      //   },
+      // ];
+      // try {
+      //   const res: any = await fetch(
+      //     "https://192.168.93.11/jhai/dockerServiceMetrics/targets",
+      //     {
+      //       method: "GET",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //     },
+      //   );
 
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const data = await res.json();
+      //   if (!res.ok) {
+      //     throw new Error(`HTTP error! status: ${res.status}`);
+      //   }
+      //   const data = await res.json();
 
-        model1.push(data.data[0]);
-      } catch (e) {
-        console.log(e);
-        model1.push({
-          model: "Qwen2.5-72B-Instruct-AWQ",
-          title: JSON.stringify(e),
-          apiBase:
-            "http://192.168.0.22/dockerService/vllm-pzhlei-e8fac41f-c596-4a9d-9798-910712404819/v1",
-          provider: "openai",
-          roles: "chat",
-        });
-      }
-      model1.push(model);
-      model1.forEach((item: any) => {
+      //   model1.push(data.data[0]);
+      // } catch (e) {
+      //   console.log(e);
+      //   model1.push({
+      //     model: "Qwen2.5-72B-Instruct-AWQ",
+      //     title: JSON.stringify(e),
+      //     apiBase:
+      //       "http://192.168.0.22/dockerService/vllm-pzhlei-e8fac41f-c596-4a9d-9798-910712404819/v1",
+      //     provider: "openai",
+      //     roles: "chat",
+      //   });
+      // }
+      // model1.push(model);
+      model.forEach((item: any) => {
         addModel(item, msg.data.role);
       });
 

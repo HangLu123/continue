@@ -9,7 +9,7 @@ interface CreateFileButtonProps {
 
 export function CreateFileButton({ onClick }: CreateFileButtonProps) {
   return (
-    <ToolTip place="top" content="Create File with Code">
+    <ToolTip place="top" content="使用代码创建文件">
       <HoverItem className="!p-0">
         <button
           data-testid="codeblock-toolbar-create"
@@ -18,9 +18,7 @@ export function CreateFileButton({ onClick }: CreateFileButtonProps) {
         >
           <div className="flex items-center gap-1">
             <DocumentPlusIcon className="h-3.5 w-3.5 shrink-0" />
-            <span className="line-clamp-1 select-none break-all">
-              Create file
-            </span>
+            <span className="line-clamp-1 select-none break-all">创建文件</span>
           </div>
         </button>
       </HoverItem>

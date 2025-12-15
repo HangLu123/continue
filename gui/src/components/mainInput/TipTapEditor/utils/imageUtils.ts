@@ -67,7 +67,7 @@ export async function handleImageFile(
   } else {
     ideMessenger.post("showToast", [
       "error",
-      "Images need to be in jpg or png format and less than 10MB in size.",
+      "图片必须为jpg或png格式，并且大小小于10MB。",
     ]);
   }
 }

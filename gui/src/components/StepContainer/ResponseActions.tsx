@@ -63,11 +63,7 @@ export default function ResponseActions({
     <div className="text-description-muted mx-2 flex cursor-default items-center justify-end space-x-1 bg-transparent pb-0 text-xs">
       <HeaderButtonWithToolTip
         testId={`compact-button-${index}`}
-        text={
-          showLabel
-            ? "Summarize conversation to reduce context length"
-            : "Compact conversation"
-        }
+        text={showLabel ? "通过总结对话来减少上下文长度" : "压缩对话"}
         tabIndex={-1}
         onClick={() => compactConversation(index)}
       >
@@ -88,7 +84,7 @@ export default function ResponseActions({
       {isLast && ruleGenerationSupported && (
         <HeaderButtonWithToolTip
           tabIndex={-1}
-          text="Generate rule"
+          text="生成规则"
           onClick={onGenerateRule}
         >
           <PencilSquareIcon className="text-description-muted h-3.5 w-3.5" />
@@ -98,7 +94,7 @@ export default function ResponseActions({
       {isTruncated && (
         <HeaderButtonWithToolTip
           tabIndex={-1}
-          text="Continue generation"
+          text="继续生成"
           onClick={onContinueGeneration}
         >
           <BarsArrowDownIcon className="text-description-muted h-3.5 w-3.5" />
@@ -107,7 +103,7 @@ export default function ResponseActions({
 
       <HeaderButtonWithToolTip
         testId={`delete-button-${index}`}
-        text="Delete"
+        text="删除"
         tabIndex={-1}
         onClick={onDelete}
       >

@@ -177,7 +177,7 @@ export function ModeSelect() {
           </ListboxOption>
 
           {/* Background */}
-          <ListboxOption
+          {/* <ListboxOption
             value="background"
             className={"gap-1"}
             disabled={isLocalAgent}
@@ -198,7 +198,7 @@ export function ModeSelect() {
             <CheckIcon
               className={`ml-auto h-3 w-3 ${mode === "background" ? "" : "opacity-0"}`}
             />
-          </ListboxOption>
+          </ListboxOption> */}
 
           {/* Hint */}
           <div className="text-description-muted px-2 py-1">

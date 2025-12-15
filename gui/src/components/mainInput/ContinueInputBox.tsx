@@ -28,7 +28,7 @@ interface ContinueInputBoxProps {
   contextItems?: ContextItemWithId[];
   appliedRules?: RuleMetadata[];
   hidden?: boolean;
-  inputId: string; // used to keep track of things per input in redux
+  inputId: string;
 }
 
 const EDIT_DISALLOWED_CONTEXT_PROVIDERS = [
@@ -88,7 +88,7 @@ function ContinueInputBox(props: ContinueInputBoxProps) {
   }, [availableContextProviders, isInEdit]);
 
   const historyKey = isInEdit ? "edit" : "chat";
-  const placeholder = isInEdit ? "Edit selected code" : undefined;
+  const placeholder = isInEdit ? "编辑选中的代码…" : undefined;
 
   const toolbarOptions: ToolbarOptions = useMemo(() => {
     if (isInEdit) {
@@ -98,10 +98,12 @@ function ContinueInputBox(props: ContinueInputBoxProps) {
         hideUseCodebase: true,
         hideSelectModel: false,
         enterText:
-          editModeState.applyState.status === "done" ? "Retry" : "Edit",
+          editModeState.applyState.status === "done"
+            ? "重试"
+            : "应用编辑",
       } as ToolbarOptions;
     }
-    // Stable empty object to avoid re-renders from identity changes
+
     return {} as ToolbarOptions;
   }, [isInEdit, editModeState.applyState.status]);
 

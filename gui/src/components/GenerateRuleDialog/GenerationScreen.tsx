@@ -42,17 +42,14 @@ export function GenerationScreen({
 
   const formData = watch();
 
-  // Track rule type separately from form data
   const [selectedRuleType, setSelectedRuleType] = useState<RuleType>(
     RuleType.Always,
   );
   const [formError, setFormError] = useState<string | null>(null);
 
-  // Use the generation hook with the input prompt
   const { generateRule, isGenerating, error } = useRuleGeneration(
     inputPrompt,
     (args) => {
-      // Streaming causes a lot of jank, so wait until done generating
       if (!isGenerating) {
         reset(args);
         handleRuleTypeChange(getRuleType(args));
@@ -60,7 +57,6 @@ export function GenerationScreen({
     },
   );
 
-  // Start generation once when component mounts (only if not in manual mode)
   useEffect(() => {
     if (!isManualMode) {
       void generateRule();
@@ -70,25 +66,20 @@ export function GenerationScreen({
   const handleRuleTypeChange = (newRuleType: RuleType) => {
     setSelectedRuleType(newRuleType);
 
-    // Update alwaysApply based on rule type
     const alwaysApply = newRuleType === RuleType.Always;
     setValue("alwaysApply", alwaysApply);
-
-    // Don't clear optional fields - preserve their state
-    // Users can manually clear them if needed
   };
 
   const handleContinue = async () => {
-    // Clear any previous errors
     setFormError(null);
 
     if (!formData.name) {
-      setFormError("Rule name is required");
+      setFormError("规则名称为必填项");
       return;
     }
 
     if (!formData.rule) {
-      setFormError("Rule content is required");
+      setFormError("规则内容为必填项");
       return;
     }
 
@@ -117,7 +108,7 @@ export function GenerationScreen({
       );
 
       if (workspaceDirs.status !== "success") {
-        setFormError("Failed to get workspace directory");
+        setFormError("获取工作区目录失败");
         return;
       }
 
@@ -132,9 +123,8 @@ export function GenerationScreen({
 
       onSuccess();
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Unknown error occurred";
-      setFormError(`Failed to create rule file: ${errorMessage}`);
+      const errorMessage = err instanceof Error ? err.message : "未知错误";
+      setFormError(`创建规则文件失败：${errorMessage}`);
     }
   };
 
@@ -144,25 +134,24 @@ export function GenerationScreen({
     <div className="px-2 pb-2 pt-4 sm:px-4">
       <div>
         <div className="text-center">
-          <h2 className="mb-0">Your rule</h2>
+          <h2 className="mb-0">你的规则</h2>
           <p className="text-description m-0 mt-2 p-0">
-            Review and edit your generated rule below
+            请在下面查看并编辑生成的规则
           </p>
         </div>
         <div className="mt-5">
           <div className="flex flex-col gap-4">
-            {/* Rule metadata form */}
             <div className="space-y-4">
-              {/* Rule Name - Always visible */}
+              {/* Rule Name */}
               <div className="space-y-1">
                 <label className="text-foreground text-sm font-medium">
-                  Rule Name
+                  规则名称
                 </label>
                 <div className="relative">
                   <input
                     type="text"
                     className="border-input-border bg-input text-input-foreground placeholder:text-input-placeholder focus:border-border-focus box-border w-full rounded-md border px-3 py-2 text-xs focus:outline-none"
-                    placeholder={showNameSpinner ? "" : "Enter rule name..."}
+                    placeholder={showNameSpinner ? "" : "输入规则名称..."}
                     disabled={isGenerating && !isManualMode}
                     {...register("name")}
                   />
@@ -174,11 +163,11 @@ export function GenerationScreen({
                 </div>
               </div>
 
-              {/* Rule Type Selector - Always visible */}
+              {/* Rule Type */}
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <label className="text-foreground text-sm font-medium">
-                    Rule Type
+                    规则类型
                   </label>
                   <ToolTip
                     style={{ zIndex: 100001 }}
@@ -200,41 +189,45 @@ export function GenerationScreen({
                       <option value=""></option>
                     ) : (
                       <>
-                        <option value={RuleType.Always}>Always</option>
+                        <option value={RuleType.Always}>
+                          始终应用 (Always)
+                        </option>
                         <option value={RuleType.AutoAttached}>
-                          Auto Attached
+                          自动附加 (Auto Attached)
                         </option>
                         <option value={RuleType.AgentRequested}>
-                          Agent Requested
+                          Agent 请求时应用 (Agent Requested)
                         </option>
-                        <option value={RuleType.Manual}>Manual</option>
+                        <option value={RuleType.Manual}>
+                          手动选择 (Manual)
+                        </option>
                       </>
                     )}
                   </select>
                 </div>
               </div>
 
-              {/* Description (for Agent Requested only) */}
+              {/* Description (AgentRequested) */}
               <div
                 className={`space-y-1 ${selectedRuleType === RuleType.AgentRequested ? "" : "hidden"}`}
               >
                 <label className="text-foreground text-sm font-medium">
-                  Description
+                  描述
                 </label>
                 <textarea
                   className="border-input-border bg-input text-input-foreground placeholder:text-input-placeholder focus:border-border-focus box-border w-full resize-none rounded-md border px-3 py-2 text-xs focus:outline-none"
                   rows={3}
-                  placeholder="Description of the task this rule is helpful for..."
+                  placeholder="此规则适用于哪些任务的说明..."
                   {...register("description")}
                 />
               </div>
 
-              {/* File Pattern (for Auto Attached only) */}
+              {/* File Pattern (AutoAttached) */}
               <div
                 className={`space-y-1 ${selectedRuleType === RuleType.AutoAttached ? "" : "hidden"}`}
               >
                 <label className="text-foreground text-sm font-medium">
-                  File pattern matches
+                  文件匹配模式
                 </label>
                 <input
                   type="text"
@@ -248,13 +241,13 @@ export function GenerationScreen({
             {/* Rule Content */}
             <div className="relative">
               <label className="text-foreground text-sm font-medium">
-                Rule Content
+                规则内容
               </label>
               <textarea
                 className="border-input-border bg-input text-input-foreground placeholder:text-input-placeholder focus:border-border-focus mt-1 box-border w-full resize-none rounded border p-2 text-xs focus:outline-none"
                 rows={10}
                 disabled={isGenerating && !isManualMode}
-                placeholder="Your rule content..."
+                placeholder="输入规则内容..."
                 {...register("rule")}
               />
             </div>
@@ -269,7 +262,7 @@ export function GenerationScreen({
                   variant="outline"
                   disabled={isGenerating && !isManualMode}
                 >
-                  Back
+                  返回
                 </Button>
                 <Button
                   className="min-w-16"
@@ -280,12 +273,12 @@ export function GenerationScreen({
                     !formData.name
                   }
                 >
-                  Continue
+                  继续
                 </Button>
               </div>
               {formError && (
                 <span className="text-error text-center text-xs">
-                  Error creating rule: {formError}
+                  创建规则失败：{formError}
                 </span>
               )}
             </div>

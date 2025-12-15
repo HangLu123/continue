@@ -87,7 +87,7 @@ function ChatIndexingPeeks() {
     });
     if (docsIndexing.length > 0) {
       mergedStates.push({
-        displayName: "Docs indexing",
+        displayName: "文档索引中…",
         type: "docs",
         titles: docsIndexing.map((doc) => doc.title),
         progressPercentage: mergeProgress(docsIndexing),

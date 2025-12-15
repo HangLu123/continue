@@ -94,7 +94,7 @@ function ThinkingBlockPeek({
         >
           {redactedThinking ? (
             <div className="text-description pl-5 text-xs italic">
-              Thinking content redacted due to safety reasons.
+              思考内容因安全原因被删减。
             </div>
           ) : (
             <MarkdownWrapper>

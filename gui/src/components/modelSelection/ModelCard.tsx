@@ -161,7 +161,7 @@ function ModelCard(props: ModelCardProps) {
             href={props.refUrl}
             target="_blank"
           >
-            <HeaderButtonWithToolTip text="Read the docs">
+            <HeaderButtonWithToolTip text="查看文档">
               <BookOpenIcon width="1.6em" height="1.6em" />
             </HeaderButtonWithToolTip>
           </a>
@@ -209,7 +209,7 @@ function ModelCard(props: ModelCardProps) {
                 <InfoHover
                   id={"provider-info"}
                   msg={
-                    "Select the provider through which you will access the model"
+                    "选择你要通过哪个 Provider 调用该模型"
                   }
                 />
               </div>

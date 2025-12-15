@@ -69,11 +69,9 @@ const ModelRoleSelector = ({
       <Listbox value={selectedModel?.title ?? null} onChange={handleSelect}>
         <div className="relative">
           {models.length === 0 ? (
-            <ListboxButton
-              className="bg-input border-command-border hover:bg-list-active hover:text-list-active-foreground text-description w-full justify-between rounded border px-2 py-1.5"
-            >
+            <ListboxButton className="bg-input border-command-border hover:bg-list-active hover:text-list-active-foreground text-description w-full justify-between rounded border px-2 py-1.5">
               <span className="line-clamp-1" style={{ fontSize: fontSize(-1) }}>
-                Setup {displayName} model
+                设置 {displayName} 模型
               </span>
             </ListboxButton>
           ) : (
@@ -84,9 +82,9 @@ const ModelRoleSelector = ({
               >
                 {models.length === 0 || noConfiguredModels ? (
                   <span className="text-lightgray line-clamp-1 italic">
-                    {`No ${models.length === 0 ? "" : "valid "}${displayName} models${
+                    {`没有 ${models.length === 0 ? "" : "有效 "}${displayName} 模型${
                       ["Chat", "Apply", "Edit"].includes(displayName)
-                        ? ". Using Chat model"
+                        ? "。正在使用 Chat 模型"
                         : ""
                     }`}
                   </span>
@@ -95,7 +93,7 @@ const ModelRoleSelector = ({
                     className="line-clamp-1"
                     style={{ fontSize: fontSize(-1) }}
                   >
-                    {selectedModel?.title ?? `Select ${displayName} model`}
+                    {selectedModel?.title ?? `选择 ${displayName} 模型`}
                   </span>
                 )}
 
@@ -116,18 +114,18 @@ const ModelRoleSelector = ({
                       const isConfigInvalid =
                         option.configurationStatus !==
                         LLMConfigurationStatuses.VALID;
-                      let invalidMessage = "(Invalid config)";
+                      let invalidMessage = "（配置无效）";
                       if (
                         option.configurationStatus ===
                         LLMConfigurationStatuses.MISSING_ENV_SECRET
                       ) {
-                        invalidMessage = "(Missing env secret)";
+                        invalidMessage = "（缺少环境密钥）";
                       }
                       if (
                         option.configurationStatus ===
                         LLMConfigurationStatuses.MISSING_API_KEY
                       ) {
-                        invalidMessage = "(Missing API Key)";
+                        invalidMessage = "（缺少 API 密钥）";
                       }
 
                       return (

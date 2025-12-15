@@ -33,7 +33,7 @@ export function CollapsibleContainer({
             onClick={() => setIsExpanded(true)}
             className="group flex h-full cursor-pointer items-end justify-center pb-2"
           >
-            <span title="Expand to show full content">
+            <span title="展开显示全部内容">
               <ChevronDownIcon className="text-lightgray group-hover:text-foreground h-4 w-4" />
             </span>
           </div>
@@ -45,7 +45,7 @@ export function CollapsibleContainer({
           onClick={() => setIsExpanded(false)}
           className="group mt-2 flex cursor-pointer justify-center"
         >
-          <span title="Collapse to compact view">
+          <span title="收起显示简要内容">
             <ChevronDownIcon className="text-lightgray group-hover:text-foreground h-4 w-4 rotate-180" />
           </span>
         </div>

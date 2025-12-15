@@ -262,7 +262,7 @@ export function FindAndReplaceDisplay({
   if (diffResult?.error) {
     return (
       <div className="text-description mt-2 px-3">
-        The searched string was not found in the file
+        未在文件中找到搜索的字符串
       </div>
     );
   }

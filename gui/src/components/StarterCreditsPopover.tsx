@@ -53,9 +53,7 @@ function CreditStatusProgressBar({
   const total = 50;
   const usage = total - (creditStatus.creditBalance ?? 0);
 
-  return (
-    <ProgressBar label="Starter credits usage" current={usage} total={total} />
-  );
+  return <ProgressBar label="试用额度使用情况" current={usage} total={total} />;
 }
 
 interface StarterCreditsPopoverProps {
@@ -88,7 +86,6 @@ export default function StarterCreditsPopover({
   };
 
   const onHideStarterCreditsUsage = async () => {
-    // At this point the user doesn't want to see the credit usage UI, so we make sure this is gone right away
     setLocalStorage("hasExitedFreeTrial", true);
   };
 
@@ -128,14 +125,14 @@ export default function StarterCreditsPopover({
           <div className="relative max-w-96 px-4 pb-4">
             <div className="flex items-center gap-2">
               <GiftIcon className="h-4 w-4" />
-              <h3 className="text-sm font-semibold">Starter credits</h3>
+              <h3 className="text-sm font-semibold">试用额度</h3>
             </div>
             <div className="absolute right-3 top-3 flex items-center gap-1">
               <ToolbarButtonWithTooltip
                 onClick={() => {
                   void onRefresh();
                 }}
-                tooltipContent="Refresh credit usage"
+                tooltipContent="刷新额度使用情况"
               >
                 <ArrowPathIcon
                   className={cn("h-3 w-3", isRefreshing && "animate-spin-slow")}
@@ -143,37 +140,18 @@ export default function StarterCreditsPopover({
               </ToolbarButtonWithTooltip>
               <ToolbarButtonWithTooltip
                 onClick={onHideStarterCreditsUsage}
-                tooltipContent="Hide starter credits usage"
+                tooltipContent="隐藏试用额度栏"
               >
                 <XMarkIcon className="h-3 w-3" />
               </ToolbarButtonWithTooltip>
             </div>
 
-            <div className="mb-4">
-              <span className="text-description">
-                You are currently using starter credits for Continue, which
-                allows you to use a variety of frontier models at cost. Read
-                more{" "}
-                <span
-                  onClick={async () => {
-                    await ideMessenger.request("controlPlane/openUrl", {
-                      path: "pricing",
-                      orgSlug: undefined,
-                    });
-                    ``;
-                  }}
-                  className="cursor-pointer text-blue-400 underline hover:text-blue-300"
-                >
-                  here
-                </span>
-                .
-              </span>
-            </div>
+            <div className="mb-4"></div>
 
             {!creditStatus ? (
               <div className="mb-4 flex items-center justify-center py-8">
                 <span className="text-description">
-                  Loading credit usage...
+                  正在加载额度使用情况...
                 </span>
               </div>
             ) : (
@@ -182,10 +160,10 @@ export default function StarterCreditsPopover({
 
             <div className="mt-4 flex gap-2">
               <SecondaryButton className="flex-1" onClick={onSetupApiKeys}>
-                Setup API Keys
+                设置 API Key
               </SecondaryButton>
               <Button className="flex-1" onClick={onPurchaseCredits}>
-                Purchase Credits
+                购买额度
               </Button>
             </div>
           </div>

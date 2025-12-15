@@ -57,7 +57,7 @@ export function ConversationStarterCards() {
           className="text-lightgray mt-1 cursor-pointer text-xs hover:underline"
           onClick={() => setShowAll(!showAll)}
         >
-          {showAll ? "Show less" : `Show ${remainingCount} more...`}
+          {showAll ? "收起" : `显示另外 ${remainingCount} 个…`}
         </span>
       )}
     </div>

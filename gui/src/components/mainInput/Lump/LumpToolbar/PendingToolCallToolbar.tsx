@@ -63,7 +63,7 @@ export function PendingToolCallToolbar() {
                   {jetbrains ? getAltKeyLabel() : getMetaKeyLabel()}⌫
                 </span>
               )}
-              <span>Reject</span>
+              <span>拒绝</span>
             </Button>
 
             <Button
@@ -79,7 +79,7 @@ export function PendingToolCallToolbar() {
               {index === 0 && (
                 <span className="text-2xs mr-1">{getMetaKeyLabel()}⏎</span>
               )}
-              <span>Accept</span>
+              <span>接受</span>
             </Button>
           </div>
         </div>

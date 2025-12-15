@@ -6,12 +6,10 @@ import {
   CubeIcon,
   DocumentIcon,
   PencilIcon,
-  QuestionMarkCircleIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
 import { ConfigSection } from "./components/ConfigSection";
 import { ConfigsSection } from "./sections/ConfigsSection";
-import { HelpSection } from "./sections/HelpSection";
 import { IndexingSettingsSection } from "./sections/IndexingSettingsSection";
 import { ModelsSection } from "./sections/ModelsSection";
 import { OrganizationsSection } from "./sections/OrganizationsSection";
@@ -97,6 +95,24 @@ export const topTabSections: TabSection[] = [
           </ConfigSection>
         ),
         icon: <DocumentIcon className="xs:h-4 xs:w-4 h-3 w-3 flex-shrink-0" />,
+      }
+    ],
+  },
+  {
+    id: "indexing",
+    showTopDivider: true,
+    tabs: [
+      {
+        id: "indexing",
+        label: "索引（Indexing）",
+        component: (
+          <ConfigSection>
+            <IndexingSettingsSection />
+          </ConfigSection>
+        ),
+        icon: (
+          <CircleStackIcon className="xs:h-4 xs:w-4 h-3 w-3 flex-shrink-0" />
+        ),
       },
     ],
   },

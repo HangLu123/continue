@@ -20,7 +20,6 @@ const ContextStatus = () => {
 
   const isDifferentModelAndSameHistory = useMemo(() => {
     if (!selectedChatModel) return false;
-    // only reset if history changes
     if (previousHistoryLength.current !== history.length) {
       previousHistoryLength.current = history.length;
       previousSelectedChatModel.current = selectedChatModel;
@@ -34,7 +33,6 @@ const ContextStatus = () => {
     return null;
   }
 
-  // if user changed to a different model, we shouldn't show the context status until the user sends a new message
   if (isDifferentModelAndSameHistory) {
     return null;
   }
@@ -45,7 +43,6 @@ const ContextStatus = () => {
     <div>
       <ToolTip
         closeEvents={{
-          // blur: false,
           mouseleave: true,
           click: true,
           mouseup: false,
@@ -53,12 +50,10 @@ const ContextStatus = () => {
         clickable
         content={
           <div className="flex flex-col gap-0 text-left text-xs">
-            <span className="inline-block">
-              {`${percent}% of context filled.`}
-            </span>
+            <span className="inline-block">{`上下文已使用 ${percent}%。`}</span>
             {isPruned && (
               <span className="inline-block">
-                {`Oldest messages are being removed.`}
+                {`最早的消息正在被自动删除。`}
               </span>
             )}
             {history.length > 0 && (
@@ -68,7 +63,7 @@ const ContextStatus = () => {
                     className="hover:text-link inline-block cursor-pointer underline"
                     onClick={() => compactConversation(history.length - 1)}
                   >
-                    Compact conversation
+                    压缩对话
                   </span>
                   {"\n"}
                   <span
@@ -82,7 +77,7 @@ const ContextStatus = () => {
                       );
                     }}
                   >
-                    Start a new session
+                    开始新会话
                   </span>
                 </div>
               </div>

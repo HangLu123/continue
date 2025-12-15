@@ -187,7 +187,7 @@ export function LumpToolbar() {
   // Only show terminal streaming for actual terminal commands
   if (hasRunningTerminalCommand) {
     const count = runningTerminalCalls.length;
-    const stopText = `Stop Terminal${count > 1 ? ` (${count})` : ""}`;
+    const stopText = `停止终端${count > 1 ? ` (${count})` : ""}`;
     return (
       <StreamingToolbar onStop={handleStopAction} displayText={stopText} />
     );

@@ -17,7 +17,7 @@ function ConfirmationDialog(props: ConfirmationDialogProps) {
   return (
     <div className="p-4 pt-0">
       <h1 className="mb-1 text-center text-xl">
-        {props.title ?? "Confirmation"}
+        {props.title ?? "确认操作"}
       </h1>
       <p className="text-center text-base" style={{ whiteSpace: "pre-wrap" }}>
         {props.text}
@@ -33,7 +33,7 @@ function ConfirmationDialog(props: ConfirmationDialogProps) {
               props.onCancel?.();
             }}
           >
-            Cancel
+            取消
           </Button>
         )}
         <Button
@@ -43,7 +43,7 @@ function ConfirmationDialog(props: ConfirmationDialogProps) {
             dispatch(setDialogMessage(undefined));
           }}
         >
-          {props.confirmText ?? "Confirm"}
+          {props.confirmText ?? "确认"}
         </Button>
       </div>
     </div>

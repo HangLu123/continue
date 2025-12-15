@@ -33,18 +33,24 @@ export function RulesPeekItem({ rule }: RulesPeekItemProps) {
 
         <div className="flex min-w-0 flex-1 gap-2 text-xs">
           <div className="max-w-[50%] flex-shrink-0 truncate font-medium">
-            {rule.name || "Agent rule"}
+            {rule.name || "代理规则"}
           </div>
 
           <div className="min-w-0 flex-1 overflow-hidden truncate whitespace-nowrap text-xs text-gray-500">
             {isGlobal
-              ? "Always applied"
-              : `Pattern: ${typeof rule.globs === "string" ? rule.globs : Array.isArray(rule.globs) ? rule.globs.join(", ") : ""}`}
+              ? "始终应用"
+              : `匹配模式：${
+                  typeof rule.globs === "string"
+                    ? rule.globs
+                    : Array.isArray(rule.globs)
+                      ? rule.globs.join(", ")
+                      : ""
+                }`}
           </div>
         </div>
       </div>
       <div className="mt-1 pl-6 pr-2 text-xs text-gray-500">
-        Source: {getRuleSourceDisplayName(rule)}
+        来源：{getRuleSourceDisplayName(rule)}
       </div>
     </div>
   );
@@ -60,11 +66,7 @@ export function RulesPeek({ appliedRules, icon }: RulesPeekProps) {
   }
 
   return (
-    <ToggleDiv
-      icon={icon}
-      title={`${rules.length} rule${rules.length > 1 ? "s" : ""}`}
-      testId="rules-peek"
-    >
+    <ToggleDiv icon={icon} title={`${rules.length} 条规则`} testId="rules-peek">
       {rules.map((rule, idx) => (
         <RulesPeekItem key={`rule-${idx}`} rule={rule} />
       ))}

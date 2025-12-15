@@ -139,8 +139,7 @@ export const SecureImageComponent: React.FC<SecureImageComponentProps> = ({
   return (
     <ImagePlaceholder>
       <WarningText>
-        Image blocked for security. External images can leak data through URL
-        parameters. Click to load if you trust the source.
+        图像因安全原因被阻止。外部图片可能通过URL参数泄露数据。如果您信任该来源，可点击加载。
       </WarningText>
 
       <UrlDisplay>
@@ -149,7 +148,7 @@ export const SecureImageComponent: React.FC<SecureImageComponentProps> = ({
 
       {hasQueryParams && (
         <QueryParamsDisplay>
-          <strong>Warning: URL contains query parameters:</strong>
+          <strong>警告：URL包含查询参数：</strong>
           <pre style={{ margin: "4px 0", fontSize: "11px" }}>
             {JSON.stringify(queryParams, null, 2)}
           </pre>
@@ -158,11 +157,11 @@ export const SecureImageComponent: React.FC<SecureImageComponentProps> = ({
 
       {imageError && (
         <div style={{ color: lightGray, fontSize: "12px", marginTop: "8px" }}>
-          Failed to load image. The URL may be invalid or inaccessible.
+          无法加载图片。URL可能无效或无法访问。
         </div>
       )}
 
-      <LoadButton onClick={() => setShowImage(true)}>Load Image</LoadButton>
+      <LoadButton onClick={() => setShowImage(true)}>加载图片</LoadButton>
     </ImagePlaceholder>
   );
 };

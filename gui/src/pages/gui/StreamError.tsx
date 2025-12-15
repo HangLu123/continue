@@ -46,7 +46,7 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
   } = useMemo(() => analyzeError(error, selectedModel), [error, selectedModel]);
 
   const handleRefreshProfiles = () => {
-    void refreshProfiles("Clicked reload config from stream error dialog");
+    void refreshProfiles("从流错误对话框点击重新加载配置");
     dispatch(setShowDialog(false));
     dispatch(setDialogMessage(undefined));
   };
@@ -63,7 +63,7 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
       onClick={() => ideMessenger.ide.openUrl(apiKeyUrl)}
     >
       <KeyIcon className="mr-1.5 h-3.5 w-3.5" />
-      <span>View key</span>
+      <span>查看密钥</span>
     </GhostButton>
   ) : null;
 
@@ -75,7 +75,7 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
       onClick={() => handleEditModel(selectedModel)}
     >
       <Cog6ToothIcon className="mr-1.5 h-3.5 w-3.5" />
-      <span>View config</span>
+      <span>查看配置</span>
     </GhostButton>
   );
 
@@ -95,7 +95,7 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
         }
 
         if (!mainEditor) {
-          console.error("Main editor not found, cannot resubmit message.");
+          console.error("未找到主编辑器，无法重新提交消息。");
           return;
         }
 
@@ -117,7 +117,7 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
       }}
     >
       <ArrowPathIcon className="mr-1.5 h-3.5 w-3.5" />
-      <span>Resubmit last message</span>
+      <span>重新提交上一条消息</span>
     </GhostButton>
   );
 
@@ -129,25 +129,22 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
     <div className="mb-1 mt-3">
       <div className="m-0 p-0">
         <p className="m-0 mb-2 p-0">
-          There was an error handling the response from{" "}
-          {selectedModel?.title || "the model"}.
+          处理来自 {selectedModel?.title || "模型"} 的响应时发生错误。
         </p>
         <p className="m-0 p-0">
-          Please try to submit your message again, and if the error persists,
-          let us know by reporting the issue using the buttons below.
+          请尝试重新提交消息。如果问题仍然存在，请使用下方按钮向我们报告该问题。
         </p>
         <div className="mt-3">{resubmitButton}</div>
       </div>
     </div>
   );
 
-  // Display components for specific errors
+  // 针对特定错误码的提示
   if (statusCode === 429) {
     errorContent = (
       <div className="flex flex-col gap-2">
         <span>
-          {`This might mean your ${modelTitle} usage has been rate limited
-                by ${providerName}.`}
+          {`这可能意味着你的 ${modelTitle} 请求被 ${providerName} 触发了速率限制。`}
         </span>
         <div className="flex flex-row flex-wrap justify-start gap-3 py-4">
           {checkKeysButton}
@@ -160,23 +157,23 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
   if (statusCode === 404) {
     errorContent = (
       <div className="flex flex-col gap-2">
-        <span>Likely causes:</span>
+        <span>可能的原因：</span>
         <ul className="m-0">
           <li>
-            <span>Invalid</span>
+            <span>无效的</span>
             <code>apiBase</code>
             {selectedModel && (
               <>
-                <span>{`: `}</span>
+                <span>{`：`}</span>
                 <code>{selectedModel.apiBase}</code>
               </>
             )}
           </li>
           <li>
-            <span>Model/deployment not found</span>
+            <span>未找到模型 / 部署</span>
             {selectedModel && (
               <>
-                <span>{` for: `}</span>
+                <span>{`：`}</span>
                 <code>{selectedModel.model}</code>
               </>
             )}
@@ -192,13 +189,13 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
       <div className="flex flex-col gap-2">
         {session && selectedProfile && !isLocalProfile(selectedProfile) && (
           <div className="flex flex-col gap-1">
-            <span>{`If your hub secret values may have changed, refresh your agents`}</span>
+            <span>如果你的 Hub 密钥可能已发生变化，请刷新你的 Agent</span>
             <SecondaryButton onClick={handleRefreshProfiles}>
-              Refresh agent secrets
+              刷新 Agent 密钥
             </SecondaryButton>
           </div>
         )}
-        <span>{`It's possible that your API key is invalid.`}</span>
+        <span>你的 API Key 可能无效。</span>
         <div className="flex flex-row flex-wrap gap-2">
           {checkKeysButton}
           {configButton}
@@ -210,7 +207,7 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
   if (statusCode === 403) {
     errorContent = (
       <div className="flex flex-col gap-2">
-        <span>{`Likely cause: not authorized to access the model deployment.`}</span>
+        <span>可能原因：你没有权限访问该模型部署。</span>
         <div className="flex flex-row flex-wrap gap-2">
           {checkKeysButton}
           {configButton}
@@ -226,32 +223,29 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
   ) {
     errorContent = (
       <div className="flex flex-col gap-2">
-        <span>{`Most likely, the provider's server(s) are overloaded and streaming was interrupted. Try again later`}</span>
+        <span>提供方服务器很可能过载，导致流式响应被中断。请稍后重试。</span>
         {selectedModel ? (
           <span>
-            {`Provider: `}
+            提供方：
             <code>{selectedModel.provider}</code>
           </span>
         ) : null}
-        {/* TODO: status page links for providers? */}
       </div>
     );
   }
 
   return (
     <div className="flex flex-col gap-4 px-3 pb-3 pt-3">
-      {/* Concise error title */}
       <h3 className="text-error m-0 p-0 text-lg font-medium">
-        Error handling model response
+        处理模型响应时出错
       </h3>
 
       {errorContent}
 
-      {/* Expandable technical details using ToggleDiv */}
       {message && (
         <div className="mb-2">
           <ToggleDiv
-            title="View error output"
+            title="查看错误输出"
             testId="error-output-toggle"
             defaultOpen
           >
@@ -266,7 +260,7 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
                   className="flex items-center"
                 >
                   <ClipboardIcon className="mr-1.5 h-3.5 w-3.5" />
-                  <span>Copy output</span>
+                  <span>复制输出</span>
                 </GhostButton>
 
                 <GhostButton
@@ -276,7 +270,7 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
                   className="flex items-center"
                 >
                   <ArrowTopRightOnSquareIcon className="mr-1.5 h-4 w-4" />
-                  <span className="text-xs">View Logs</span>
+                  <span className="text-xs">查看日志</span>
                 </GhostButton>
               </div>
             </div>
@@ -285,33 +279,34 @@ const StreamErrorDialog = ({ error }: StreamErrorProps) => {
       )}
 
       <div>
-        <span className="text-base font-medium">Report this error</span>
+        <span className="text-base font-medium">报告此错误</span>
         <div className="mt-2 flex flex-row flex-wrap items-center gap-2">
           <GhostButton
             className="flex flex-row items-center gap-2 rounded px-3 py-1.5"
             onClick={() => {
-              const issueTitle = `Error: ${selectedModel?.title || "Model"} - ${statusCode || "Unknown error"}`;
-              const issueBody = `**Error Details**
+              const issueTitle = `错误：${selectedModel?.title || "模型"} - ${statusCode || "未知错误"}`;
+              const issueBody = `**错误详情**
 
-Model: ${selectedModel?.title || "Unknown"}
-Provider: ${selectedModel?.provider || "Unknown"}
-Status Code: ${statusCode || "N/A"}
+模型：${selectedModel?.title || "未知"}
+提供方：${selectedModel?.provider || "未知"}
+状态码：${statusCode || "N/A"}
 
-**Error Output**
+**错误输出**
 \`\`\`
 ${parsedError}
 \`\`\`
 
-**Additional Context**
-Please add any additional context about the error here
+**补充说明**
+请在此处补充更多上下文信息
 `;
               const url = `https://github.com/continuedev/continue/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}`;
               ideMessenger.post("openUrl", url);
             }}
           >
             <GithubIcon className="h-5 w-5" />
-            <span className="xs:flex hidden">Open GitHub issue</span>
+            <span className="xs:flex hidden">提交 GitHub Issue</span>
           </GhostButton>
+
           <GhostButton
             className="flex flex-row items-center gap-2 rounded px-3 py-1.5"
             onClick={() => {
@@ -319,7 +314,7 @@ Please add any additional context about the error here
             }}
           >
             <DiscordIcon className="h-5 w-5" />
-            <span className="xs:flex hidden">Discord</span>
+            <span className="xs:flex hidden">Discord 社区</span>
           </GhostButton>
         </div>
       </div>

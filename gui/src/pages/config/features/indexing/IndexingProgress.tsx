@@ -29,7 +29,7 @@ function IndexingProgress() {
   const dispatch = useDispatch();
   const [paused, setPaused] = useState<boolean | undefined>(undefined);
   const [update, setUpdate] = useState<IndexingProgressUpdate>({
-    desc: "Loading indexing config",
+    desc: "加载索引配置",
     progress: 0.0,
     status: "loading",
   });
@@ -62,13 +62,13 @@ function IndexingProgress() {
       dispatch(
         setDialogMessage(
           <ConfirmationDialog
-            title="Rebuild codebase index"
+            title="重建代码库索引"
             confirmText="Rebuild"
             text={
-              "Your index appears corrupted. We recommend clearing and rebuilding it, " +
-              "which may take time for large codebases.\n\n" +
-              "For a faster rebuild without clearing data, press 'Shift + Command + P' to open " +
-              "the Command Palette, and type out 'Continue: Force Codebase Re-Indexing'"
+              "您的索引似乎已损坏。我们建议清除并重新构建索引，" +
+              "这可能会花费大型代码库一些时间。\n\n" +
+              "如需更快重建而无需清除数据，请按 'Shift + Command + P' 打开" +
+              "命令面板，然后输入 'Continue: Force Codebase Re-Indexing'"
             }
             onConfirm={() => {
               posthog.capture("rebuild_index_clicked");

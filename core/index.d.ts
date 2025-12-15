@@ -1661,7 +1661,8 @@ export interface AnalyticsConfig {
 }
 
 export interface JSONModelDescription {
-  title: string;
+  title?: string;
+  name?: string;
   provider: string;
   underlyingProviderName: string;
   model: string;

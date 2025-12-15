@@ -1,13 +1,11 @@
 import fs from "fs";
 import os from "os";
 
-import { ModelConfig } from "@continuedev/config-yaml";
 import {
   ContinueConfig,
   ExperimentalModelRoles,
   IDE,
   ILLM,
-  JSONModelDescription,
   PromptTemplate,
 } from "../";
 import { GlobalContext } from "../util/GlobalContext";
@@ -23,22 +21,22 @@ function stringify(obj: any, indentation?: number): string {
   );
 }
 
-export function addModel(
-  model: JSONModelDescription,
-  role?: keyof ExperimentalModelRoles,
-) {
+export function addModel(model: any, role?: keyof ExperimentalModelRoles) {
   editConfigFile(
-    (config) => {
-      if (config.models?.some((m) => stringify(m) === stringify(model))) {
+    (config: any) => {
+      if (config.models?.some((m: any) => stringify(m) === stringify(model))) {
         return config;
       }
 
       const numMatches = config.models?.reduce(
-        (prev, curr) => (curr.title.startsWith(model.title) ? prev + 1 : prev),
+        (
+          prev: number,
+          curr: { name: { startsWith: (arg0: string | undefined) => any } },
+        ) => (curr.name.startsWith(model.name) ? prev + 1 : prev),
         0,
       );
       if (numMatches !== undefined && numMatches > 0) {
-        model.title = `${model.title} (${numMatches})`;
+        model.name = `${model.name} (${numMatches})`;
       }
 
       config.models.push(model);
@@ -51,7 +49,7 @@ export function addModel(
         if (!config.experimental.modelRoles) {
           config.experimental.modelRoles = {};
         }
-        config.experimental.modelRoles[role] = model.title;
+        config.experimental.modelRoles[role] = model.name;
       }
 
       return config;
@@ -59,19 +57,19 @@ export function addModel(
     (config) => {
       const numMatches = config.models?.reduce(
         (prev, curr) =>
-          "name" in curr && curr.name.startsWith(model.title) ? prev + 1 : prev,
+          "name" in curr && curr.name.startsWith(model.name) ? prev + 1 : prev,
         0,
       );
       if (numMatches !== undefined && numMatches > 0) {
-        model.title = `${model.title} (${numMatches})`;
+        model.name = `${model.name} (${numMatches})`;
       }
 
       if (!config.models) {
         config.models = [];
       }
 
-      const desc: ModelConfig = {
-        name: model.title,
+      const desc: any = {
+        name: model.name,
         provider: model.provider,
         model: model.model,
         apiKey: model.apiKey,

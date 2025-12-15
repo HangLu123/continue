@@ -100,7 +100,7 @@ function getSubActionsForSubmenuItem(
   if (item.providerTitle === "docs") {
     return [
       {
-        label: "Open in new tab",
+        label: "在新标签页中打开",
         icon: "trash",
         action: () => {
           ideMessenger.post("context/removeDocs", { startUrl: item.id });
@@ -164,7 +164,7 @@ export function getContextProviderDropdownOptions(
 
     if (contextProviderMatches.length) {
       contextProviderMatches.push({
-        title: "Add more context providers",
+        title: "添加更多上下文提供者",
         type: "action",
         action: () => {
           ideMessenger.post(
@@ -226,7 +226,7 @@ export function getSlashCommandDropdownOptions(
 
     if (query.length === 0 && commandItems.length === 0) {
       commandItems.push({
-        title: "Explore prompts",
+        title: "探索提示",
         type: "action",
         action: () =>
           ideMessenger.post(

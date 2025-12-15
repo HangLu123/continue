@@ -39,13 +39,16 @@ export const groupSessionsByDate = (
   );
 
   if (todaySessions.length > 0)
-    groups.push({ label: "Today", sessions: todaySessions });
+    groups.push({ label: "今天", sessions: todaySessions });
+
   if (weekSessions.length > 0)
-    groups.push({ label: "This Week", sessions: weekSessions });
+    groups.push({ label: "本周", sessions: weekSessions });
+
   if (monthSessions.length > 0)
-    groups.push({ label: "This Month", sessions: monthSessions });
+    groups.push({ label: "本月", sessions: monthSessions });
+
   if (olderSessions.length > 0)
-    groups.push({ label: "Older", sessions: olderSessions });
+    groups.push({ label: "更早", sessions: olderSessions });
 
   return groups;
 };
