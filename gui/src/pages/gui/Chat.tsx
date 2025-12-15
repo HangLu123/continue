@@ -51,10 +51,8 @@ import { CliInstallBanner } from "../../components/CliInstallBanner";
 import { FatalErrorIndicator } from "../../components/config/FatalErrorNotice";
 import InlineErrorMessage from "../../components/mainInput/InlineErrorMessage";
 import { resolveEditorContent } from "../../components/mainInput/TipTapEditor/utils/resolveEditorContent";
-import { setDialogMessage, setShowDialog } from "../../redux/slices/uiSlice";
 import { RootState } from "../../redux/store";
 import { cancelStream } from "../../redux/thunks/cancelStream";
-import { getLocalStorage, setLocalStorage } from "../../util/localStorage";
 import { EmptyChatBody } from "./EmptyChatBody";
 import { ExploreDialogWatcher } from "./ExploreDialogWatcher";
 import { useAutoScroll } from "./useAutoScroll";
@@ -271,7 +269,6 @@ export function Chat() {
           editorToClearOnSend.commands.clearContent();
         }
       }
-
     },
     [dispatch, ideMessenger, reduxStore, setIsCreatingAgent],
   );

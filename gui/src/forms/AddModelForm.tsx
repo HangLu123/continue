@@ -32,7 +32,7 @@ export function AddModelForm({
     providers["openai"]!,
   );
   const dispatch = useAppDispatch();
-  const { selectedProfile } = useAuth();
+  const { selectedProfile, session } = useAuth();
   const [selectedModel, setSelectedModel] = useState(
     selectedProvider.packages[0],
   );
@@ -286,6 +286,7 @@ export function AddModelForm({
 
           {/* Submit */}
           <div className="mt-4 w-full">
+            {JSON.stringify(session)}
             <Button type="submit" className="w-full" disabled={isDisabled()}>
               确定接入
             </Button>

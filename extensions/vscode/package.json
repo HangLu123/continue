@@ -1,8 +1,7 @@
 {
-  "name": "continue",
+  "name": "Jody-ai",
   "icon": "media/jody.png",
-  "author": "Continue Dev, Inc",
-  "version": "1.3.28",
+  "version": "1.3.29",
   "repository": {
     "type": "git",
     "url": "https://github.com/continuedev/continue"
@@ -11,17 +10,10 @@
     "ui",
     "workspace"
   ],
-  "bugs": {
-    "url": "https://github.com/continuedev/continue/issues",
-    "email": "nate@continue.dev"
-  },
-  "homepage": "https://continue.dev",
-  "qna": "https://github.com/continuedev/continue/issues/new/choose",
   "license": "Apache-2.0",
-  "displayName": "Jody - AI code agent",
-  "pricing": "Free",
+  "displayName": "Jody - AI agent",
   "description": "AI code agent",
-  "publisher": "Continue",
+  "publisher": "jhinno",
   "engines": {
     "vscode": "^1.70.0",
     "node": ">=20.19.0"
