@@ -87,7 +87,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         useOnboarding: false,
       });
       if (result.status === "success") {
-        setSession(result.content);
+        setSession({
+          AUTH_TYPE: "continue",
+          accessToken:
+            "eyJhbGciOiJSUzI1NiIsImtpZCI6InNzb19vaWRjX2tleV9wYWlyXzAxSjBGVzZYR1I4UjhGUkFTQ0NDNlkwUFdRIn0.eyJpc3MiOiJodHRwczovL2FwaS53b3Jrb3MuY29tIiwic3ViIjoidXNlcl8wMUtDMEczRzZQWUhKSzlZRjFUS1hCVjVBTSIsInNpZCI6InNlc3Npb25fMDFLQ0dRMjBLODFNNzQ3R0pISDlWWkpRNU0iLCJqdGkiOiIwMUtDR1EzREZaMDJOR05LUzgxN1dGSlMyNyIsImV4cCI6MTc2NjQ4Mzg1OCwiaWF0IjoxNzY1NzkyNjU4fQ.erjgo7Kkjseun4gSnJ3eEYeXQhqtlS5kqK3INJ-P07xLpJFX595Tv-xYmhfrzeIn3XBj0PmDx5Ecfi2_bBufhSHE-wETdDIs_2fhRhbaYi1kJBc2Nj_hU1GNCsD_ydO3LSFzcoRd5TRWG2jebqpWqL6cyvZxwmE7H_OKt7RZPxV385YKlNWHuVsvo-Y1PIk2BUf9M0BWiOtL9o5ysINj6tl0KEuSKV3wl6nDxY8NNLMQQTD9jk6mHJII8WJh3mFSxrETZjy3E2EsGVa2WbEgBMVz15YcuBb1i5wtX9DOnKNgm8jtcEFXMcYR-4nNeGntkGapH_Gm1Rwf0UmZ6aoaag",
+          account: { id: "1343873546@qq.com", label: "leonSir" },
+        });
       }
     }
     void init();

@@ -42,7 +42,7 @@ export class GUIActions {
     for (let i = 0; i < iframes.length; i++) {
       const iframe = iframes[i];
       const src = await iframe.getAttribute("src");
-      if (src.includes("extensionId=jhinno.Jody-ai")) {
+      if (src.includes("extensionId=jhinno.jody-continuous")) {
         continueIFrame = iframe;
         break;
       }

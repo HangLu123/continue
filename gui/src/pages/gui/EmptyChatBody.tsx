@@ -9,7 +9,7 @@ export function EmptyChatBody({ showOnboardingCard }: EmptyChatBodyProps) {
   if (showOnboardingCard) {
     return (
       <div className="mx-2 mt-6">
-        <OnboardingCard />
+        {/* <OnboardingCard /> */}
       </div>
     );
   }

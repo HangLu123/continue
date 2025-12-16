@@ -286,7 +286,6 @@ export function AddModelForm({
 
           {/* Submit */}
           <div className="mt-4 w-full">
-            {JSON.stringify(session)}
             <Button type="submit" className="w-full" disabled={isDisabled()}>
               确定接入
             </Button>

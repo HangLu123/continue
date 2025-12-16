@@ -28,7 +28,7 @@ export const isValidSnippet = (snippet: AutocompleteSnippet): boolean => {
 
   if (
     (snippet as AutocompleteCodeSnippet).filepath?.startsWith(
-      "output:extension-output-jhinno.Jody-ai",
+      "output:extension-output-jhinno.jody-continuous",
     )
   ) {
     return false;
