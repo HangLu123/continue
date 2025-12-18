@@ -1,5 +1,5 @@
 {
-  "name": "jody-continuous",
+  "name": "jody-next",
   "icon": "media/jody.png",
   "version": "1.3.29",
   "repository": {
@@ -11,7 +11,7 @@
     "workspace"
   ],
   "license": "Apache-2.0",
-  "displayName": "Jody - AI agent",
+  "displayName": "Jody Next - AI Code agent",
   "description": "AI code agent",
   "publisher": "jhinno",
   "engines": {
@@ -177,7 +177,7 @@
       {
         "command": "continue.focusEdit",
         "category": "Continue",
-        "title": "Add to Edit",
+        "title": "添加到编辑",
         "group": "Continue"
       },
       {
@@ -189,7 +189,7 @@
       {
         "command": "continue.focusContinueInputWithoutClear",
         "category": "Continue",
-        "title": "Add to Chat",
+        "title": "添加到聊天",
         "group": "Continue"
       },
       {

@@ -240,6 +240,38 @@ export async function configYamlToContinueConfig(options: {
   try {
     const promptFiles = await getAllPromptFiles(ide, undefined, true);
 
+    continueConfig.slashCommands?.push({
+      name: "解释代码",
+      description: "解释代码",
+      prompt: `用通俗易懂的语言解释选中的代码在做什么。假设读者是一名刚学习完该语言特性和基础语法的初学者。请重点解释以下内容：1）代码的目的；2）它接收哪些输入；3）它产生哪些输出；4）它是如何通过逻辑和算法实现其目的的；5）代码中任何重要的逻辑流程或数据转换。请使用初学者可以理解的简单语言，提供足够的细节，让读者全面了解代码想要完成的事情，但不要过于技术化。请将解释组织成连贯的段落，使用正确的标点和语法。撰写解释时，假设读者对这段代码没有任何先验背景。不要对未在共享代码中展示的变量或函数做出假设。回答应以被解释代码的名称作为开头。`,
+      source: "built-in",
+      sourceFile: undefined,
+    });
+    continueConfig.slashCommands?.push({
+      name: "添加注释",
+      description: "添加注释",
+      prompt:
+        "为选中的代码编写一段简要的文档注释。如果在当前文件或其他具有相同文件扩展名的文件中已存在文档注释，请将它们作为示例。请注意选中代码的作用范围（例如：导出的函数 / API，还是函数内部的实现细节），并为该作用范围使用符合习惯的文档风格。只为选中的代码生成文档，不要生成任何代码。不要包含除文档注释之外的任何代码或注释。仅输出选中代码对应的文档内容，不要输出其他任何内容。",
+      source: "built-in",
+      sourceFile: undefined,
+    });
+    continueConfig.slashCommands?.push({
+      name: "生成单元测试",
+      description: "生成单元测试",
+      prompt:
+        "请先查看上下文，以确定当前需要使用的测试框架和测试库。然后，使用检测到的测试框架和库，为选中的函数生成一组包含多个测试用例的单元测试。请务必导入被测试的函数，并使用共享上下文中展示的相同模式、测试框架、约定和库。仅基于共享代码导入模块、函数、依赖项和 mock。如果在共享上下文中已经存在针对该代码的测试套件，请重点为尚未覆盖的场景生成新的测试。如果未检测到任何测试套件，请为上下文所使用代码语种导入常见的单元测试库。重点验证关键功能，使用简单且完整的断言。在编写测试之前，请先确定应使用并导入哪些测试库和框架。最后，请将完整、可运行的新单元测试代码输出，不要包含任何注释、片段或 TODO。新测试应验证预期功能，并覆盖边界情况，包含所有必要的导入（包括被测试的函数）。不要重复共享上下文中已有的测试。仅输出完整可运行的测试代码。",
+      source: "built-in",
+      sourceFile: undefined,
+    });
+    continueConfig.slashCommands?.push({
+      name: "查找代码问题",
+      description: "查找代码问题",
+      prompt:
+        "请审查并分析选中的代码，找出在代码问题、可读性、可维护性、性能、安全性等方面可能存在的改进空间。不要列出代码中已经被解决的问题。请重点提供最多 5 条建设性的改进建议，以帮助代码变得更加健壮、高效或更符合最佳实践。对于每一条建议，请简要说明其潜在收益。在列出建议之后，请总结整体上是否存在显著的代码质量提升空间，或者该代码是否整体遵循了良好的设计原则。如果未发现任何问题，请回复“没有发现错误”。",
+      source: "built-in",
+      sourceFile: undefined,
+    });
+
     promptFiles.forEach((file) => {
       try {
         const slashCommand = slashCommandFromPromptFile(

@@ -2,7 +2,6 @@ import { parseConfigYaml } from "@continuedev/config-yaml";
 import {
   ArrowsPointingOutIcon,
   BookmarkIcon as BookmarkOutline,
-  EyeIcon,
   PencilIcon,
 } from "@heroicons/react/24/outline";
 import { BookmarkIcon as BookmarkSolid } from "@heroicons/react/24/solid";
@@ -18,7 +17,7 @@ import {
   DEFAULT_PLAN_SYSTEM_MESSAGE,
 } from "core/llm/defaultSystemMessages";
 import { getRuleDisplayName } from "core/llm/rules/rules-utils";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { DropdownButton } from "../../../components/DropdownButton";
 import AddRuleDialog from "../../../components/dialogs/AddRuleDialog";
 import HeaderButtonWithToolTip from "../../../components/gui/HeaderButtonWithToolTip";
@@ -134,9 +133,11 @@ const RuleCard: React.FC<RuleCardProps> = ({ rule }) => {
   const dispatch = useAppDispatch();
   const ideMessenger = useContext(IdeMessengerContext);
   const mode = useAppSelector((store) => store.session.mode);
+  const ruleSettings = useAppSelector((store) => store.ui.ruleSettings);
+  const hasSyncedPolicyRef = useRef(false);
   const policy = useAppSelector((state) =>
     rule.name
-      ? state.ui.ruleSettings[rule.name] || DEFAULT_RULE_SETTING
+      ? state.ui.ruleSettings[rule.name] || rule.policy || DEFAULT_RULE_SETTING
       : undefined,
   );
 
@@ -151,6 +152,18 @@ const RuleCard: React.FC<RuleCardProps> = ({ rule }) => {
   const title = useMemo(() => {
     return getRuleDisplayName(rule);
   }, [rule]);
+
+  useEffect(() => {
+    if (
+      !hasSyncedPolicyRef.current &&
+      rule.name &&
+      rule.policy &&
+      ruleSettings[rule.name] !== rule.policy
+    ) {
+      handleTogglePolicy();
+      hasSyncedPolicyRef.current = true; // 🔒 上锁
+    }
+  }, [rule.name, rule.policy, ruleSettings]);
 
   function onClickExpand() {
     dispatch(setShowDialog(true));
@@ -197,12 +210,7 @@ const RuleCard: React.FC<RuleCardProps> = ({ rule }) => {
               </HeaderButtonWithToolTip>{" "}
               {rule.source === "default-chat" ||
               rule.source === "default-agent" ? (
-                <HeaderButtonWithToolTip
-                  onClick={() => openRule(rule)}
-                  text="查看"
-                >
-                  <EyeIcon className="h-3 w-3 text-gray-400" />
-                </HeaderButtonWithToolTip>
+                ""
               ) : (
                 <HeaderButtonWithToolTip
                   onClick={() => openRule(rule)}

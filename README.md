@@ -47,7 +47,7 @@ Watch workflows execute in real-time and approve decisions step-by-step from you
 
 ## IDE Agents
 
-Trigger workflows from [VS Code](https://marketplace.visualstudio.com/items?itemName=jhinno.jody-continuous) or [JetBrains](https://plugins.jetbrains.com/plugin/22707-continue-extension)—let agents handle the refactoring while you keep coding
+Trigger workflows from [VS Code](https://marketplace.visualstudio.com/items?itemName=jhinno.jody-next) or [JetBrains](https://plugins.jetbrains.com/plugin/22707-continue-extension)—let agents handle the refactoring while you keep coding
 
 ![IDE Agents](docs/images/agent.gif)
 

@@ -1,0 +1,10 @@
+1. AI will make formal verification go mainstream (kleppmann.com) - https://martin.kleppmann.com/2025/12/08/ai-formal-verification.html
+2. alpr.watch (alpr.watch) - https://alpr.watch/
+3. No Graphics API (sebastianaaltonen.com) - https://www.sebastianaaltonen.com/blog/no-graphics-api
+4. Announcing the Beta release of ty (astral.sh) - https://astral.sh/blog/ty
+5. GPT Image 1.5 (openai.com) - https://openai.com/index/new-chatgpt-images-is-here/
+6. Pricing Changes for GitHub Actions (resources.github.com) - https://resources.github.com/actions/2026-pricing-changes-for-github-actions/
+7. VA Linux: The biggest dotcom IPO (homeip.net) - https://dfarq.homeip.net/va-linux-the-biggest-dotcom-ipo/
+8. Introduction to Software Development Tooling (2024) (bernsteinbear.com) - https://bernsteinbear.com/isdt/
+9. Show HN: Titan – JavaScript-first framework that compiles into a Rust server (npmjs.com) - https://www.npmjs.com/package/@ezetgalaxy/titan
+10. No AI* Here – A Response to Mozilla's Next Chapter (waterfox.com) - https://www.waterfox.com/blog/no-ai-here-response-to-mozilla/

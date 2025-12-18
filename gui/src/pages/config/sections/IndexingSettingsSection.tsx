@@ -84,10 +84,10 @@ export function IndexingSettingsSection() {
 
       <Alert type="warning" className="mb-6">
         <div className="space-y-4">
-          <div>
+          {/* <div>
             <div className="-mt-0.5 text-sm font-medium">索引功能已被弃用</div>
-          </div>
-          <Divider className="border-inherit" />
+          </div> */}
+          {/* <Divider className="border-inherit" /> */}
           <EnableIndexingSetting />
         </div>
       </Alert>

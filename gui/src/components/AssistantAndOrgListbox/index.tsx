@@ -1,6 +1,5 @@
 import {
   ArrowPathIcon,
-  ArrowRightStartOnRectangleIcon,
   Cog6ToothIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
@@ -184,39 +183,6 @@ export function AssistantAndOrgListbox({
               selectedProfileId={selectedProfile?.id}
               onClose={close}
             />
-            {session ? (
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  logout();
-                  close();
-                }}
-                variant="ghost"
-                size="sm"
-                className="text-description hover:bg-input my-0 w-full justify-start py-1.5 pl-1 text-left"
-              >
-                <div className="flex w-full items-center">
-                  <ArrowRightStartOnRectangleIcon className="ml-1.5 mr-2 h-3.5 w-3.5 flex-shrink-0" />
-                  <span className="text-2xs">Log out</span>
-                </div>
-              </Button>
-            ) : (
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  login(false);
-                  close();
-                }}
-                variant="ghost"
-                size="sm"
-                className="text-description hover:bg-input my-0 w-full justify-start py-1.5 pl-1 text-left"
-              >
-                <div className="flex w-full items-center">
-                  <ArrowRightStartOnRectangleIcon className="ml-1.5 mr-2 h-3.5 w-3.5 flex-shrink-0 rotate-180" />
-                  <span className="text-2xs">Log in</span>
-                </div>
-              </Button>
-            )}
             {/* Settings Section */}
             {variant !== "sidebar" && (
               <div>
